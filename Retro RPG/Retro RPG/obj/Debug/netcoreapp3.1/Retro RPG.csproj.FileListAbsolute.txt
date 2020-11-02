@@ -1,0 +1,13 @@
+C:\Users\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\bin\Debug\netcoreapp3.1\Retro RPG.exe
+C:\Users\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\bin\Debug\netcoreapp3.1\Retro RPG.deps.json
+C:\Users\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\bin\Debug\netcoreapp3.1\Retro RPG.runtimeconfig.json
+C:\Users\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\bin\Debug\netcoreapp3.1\Retro RPG.runtimeconfig.dev.json
+C:\Users\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\bin\Debug\netcoreapp3.1\Retro RPG.dll
+C:\Users\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\bin\Debug\netcoreapp3.1\Retro RPG.pdb
+C:\Users\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\obj\Debug\netcoreapp3.1\Retro RPG.csprojAssemblyReference.cache
+C:\Users\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\obj\Debug\netcoreapp3.1\Retro RPG.csproj.CoreCompileInputs.cache
+C:\Users\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\obj\Debug\netcoreapp3.1\Retro RPG.AssemblyInfoInputs.cache
+C:\Users\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\obj\Debug\netcoreapp3.1\Retro RPG.AssemblyInfo.cs
+C:\Users\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\obj\Debug\netcoreapp3.1\Retro RPG.dll
+C:\Users\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\obj\Debug\netcoreapp3.1\Retro RPG.pdb
+C:\Users\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\obj\Debug\netcoreapp3.1\Retro RPG.genruntimeconfig.cache
