@@ -10,9 +10,6 @@ namespace Final_Project
 
         public static void Main()
         {
-
-            Game_Room.Treasure_Room();
-
             new Player();
 
             new Enemy();
