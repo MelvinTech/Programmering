@@ -7,18 +7,38 @@ namespace Final_Project
 {
     class Fight
     {
-        private bool won = false;
         private bool P_Round = false;
         int Damage = 0;
 
         public Fight()
         {
-            if ( won == true)
-            {
-                Game_Room.Nr_Path();
-            }
+            new Enemy();
+            Game.Update();
+            Fight_choice();
+        }
 
-            Battle();
+        void Fight_choice()
+        {
+            Console.WriteLine("Do you wish to fight this beast for loot and glory?");
+            Console.WriteLine("1. Yes");
+            Console.WriteLine("2. No (Lose points for cowardice)");
+            string Key = Console.ReadLine();
+
+            if (Key == "1")
+            {
+                Battle();
+            }
+            else if (Key == "2")
+            {
+                Game.Update();
+                Game.Score -= 20;
+                new Game_Room();
+            }
+            else
+            {
+                Game.Update();
+                Fight_choice();
+            }
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,29 +47,7 @@ namespace Final_Project
         {
             if (Enemy.HP <= 0)
             {
-                Game_Room.Battle_Score();
-                won = true;
-                if (Enemy.Name == "Goblin")
-                {
-                    Game.Score += 10;
-                    Player.Player_Exp += 20;
-                }
-                else if (Enemy.Name == "Orc")
-                {
-                    Game.Score += 20;
-                    Player.Player_Exp += 30;
-                }
-                else if (Enemy.Name == "Witch")
-                {
-                    Game.Score += 40;
-                    Player.Player_Exp += 40;
-                }
-                else if (Enemy.Name == "Raidboss")
-                {
-                    Game.Score += 100;
-                    Player.Player_Exp += 1000;
-                }
-
+                Battle_Score();
             }
             else if (Player.Player_HP <= 0)
             {
@@ -65,9 +63,36 @@ namespace Final_Project
                 Enemy_Round();
             }
         }
-        
+        public static void Battle_Score()
+        {
+            if (Enemy.Name == "Goblin")
+            {
+                Game.Score += 10;
+                Player.Player_Exp += 10;
+            }
+            else if (Enemy.Name == "Orc")
+            {
+                Game.Score += 20;
+                Player.Player_Exp += 20;
+            }
+            else if (Enemy.Name == "Witch")
+            {
+                Game.Score += 30;
+                Player.Player_Exp += 40;
+            }
+            else if (Enemy.Name == "RaidBoss")
+            {
+                Game.Score += 2000;
+                Player.Player_Exp += 2000;
+            }
+            else
+            {
+                throw new Exception("Unknown Enemy");
+            }
+        }
+
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
+
         void Player_Round()
         {
             P_Round = true;

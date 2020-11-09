@@ -12,18 +12,8 @@ namespace Final_Project
         {
             new Player();
 
-            new Enemy();
-            Console.Clear();
-
-            Update();
-
             new Game_Room();
-
-            Update();
-            new Game_Room();
-            Update();
-            Console.WriteLine("Your score" + Score.ToString());
-            Console.Read();
+            
             // OBS! lägg till ordentlig startfunktion
         }
         public static void Update()
@@ -42,7 +32,7 @@ namespace Final_Project
         {
             Console.Clear();
             Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
-            Console.WriteLine("Game Over: Final Score: ", Score.ToString());
+            Console.WriteLine("Game Over: Final Score: " + Score.ToString());
         }
     }
 }

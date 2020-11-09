@@ -9,57 +9,12 @@ namespace Final_Project
 {
     class Game_Room
     {
+        public static string Went_Path;
         static int Nr_Paths = 0;
+       
         public Game_Room()
         {
-            new Enemy();
-            Fight_choice();
-        }
-        void Fight_choice()
-        {
-            Console.WriteLine("Do you wish to fight this beast for loot and glory?");
-            Console.WriteLine("1. Yes");
-            Console.WriteLine("2. No (Lose points for cowardice)");
-            string Key =Console.ReadLine();
-            
-            if ( Key == "1")
-            {
-                new Fight();
-            }
-            else if (Key == "2")
-            {
-                Game.Update();
-                new Game_Room();
-            }
-            else
-            {
-                Game.Update();
-                Fight_choice();
-            }
-        }
-
-        public static void Battle_Score()
-        {
-            if (Enemy.Name == "Goblin")
-            {
-                Game.Score += 10;
-            }
-            else if (Enemy.Name == "Orc")
-            {
-                Game.Score += 20;
-            }
-            else if (Enemy.Name == "Witch")
-            {
-                Game.Score += 30;
-            }
-            else if (Enemy.Name == "RaidBoss")
-            {
-                Game.Score += 2000;
-            }
-            else
-            {
-                throw new Exception("Unknown Enemy");
-            }
+            Nr_Path();
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,7 +30,6 @@ namespace Final_Project
             Console.ReadLine();
 
             new Game_Room();
-            
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,7 +37,7 @@ namespace Final_Project
         public static void Nr_Path()
         {
             Random Path_Gen = new Random();
-            Nr_Paths = Path_Gen.Next(0, 4);
+            Nr_Paths = Path_Gen.Next(1, 4);
 
             if (Nr_Paths.Equals(1))
             {
@@ -109,18 +63,86 @@ namespace Final_Project
 
             if (choice == "1")
             {
-
+                Went_Path = "Forward";
+                Way();
+            }
+            else
+            {
+                Game.Update();
+                Single_Path();
+                Console.WriteLine("Unrecognised command, please try again.");
             }
         }
 
         static void Double_Path()
         {
+            Console.SetCursorPosition(0, Console.WindowHeight / 2);
+            Console.WriteLine(" You can go left and right!");
+            Console.WriteLine(" 1. Go left");
+            Console.WriteLine(" 2. Go right");
+            string choice = Console.ReadLine();
 
+            if (choice == "1")
+            {
+                Went_Path = "Left";
+                Way();
+            }
+            if (choice == "2")
+            {
+                Went_Path = "Right";
+                Way();
+            }
+            Game.Update();
+            Double_Path();
+            Console.WriteLine("Unrecognised command, please try again.");
         }
 
         static void Triple_Path()
         {
+            Console.SetCursorPosition(0, Console.WindowHeight / 2);
+            Console.WriteLine(" You can go left, right or center");
+            Console.WriteLine(" 1. Go forward");
+            Console.WriteLine(" 2. Go left");
+            Console.WriteLine(" 3. Go right");
+            string choice = Console.ReadLine();
 
+            if (choice == "1")
+            {
+                Went_Path = "Forward";
+                Way();
+            }
+            if (choice == "2")
+            {
+                Went_Path = "Left";
+                Way();
+            }
+            if (choice == "3")
+            {
+                Went_Path = "right";
+                Way();
+            }
+            Game.Update();
+            Triple_Path();
+            Console.WriteLine("Unrecognised command, please try again.");
+        }
+        static void Way()
+        {
+            Game.Update();
+            Random random = new Random();
+            int encounter = random.Next(0, 4);
+
+            if (encounter == 1)
+            {
+                new Fight();
+            }
+            if (encounter == 2)
+            {
+                Treasure_Room();
+            }
+            if (encounter == 3)
+            {
+                new Game_Room();
+            }
         }
     }
 }

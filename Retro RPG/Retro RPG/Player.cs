@@ -19,7 +19,7 @@ namespace Final_Project
             Console.WriteLine("Welcome adventurer, what is thy name?");
             Player_Name = Console.ReadLine();
         }
-        public static void Level() // kollar ifall spelaren har tillräkligt mycket exp för att gåupp en level
+        public static void Level() // kollar ifall spelaren har tillräkligt mycket exp för att gå upp en level
         {
             if ( Player_Exp >= 100)
             {
