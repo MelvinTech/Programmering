@@ -10,6 +10,7 @@ namespace Final_Project
 
         public static void Main()
         {
+            Game_Over();
             new Player();
 
             new Game_Room();
@@ -33,6 +34,10 @@ namespace Final_Project
             Console.Clear();
             Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
             Console.WriteLine("Game Over: Final Score: " + Score.ToString());
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadLine();
+            Environment.Exit(1);
+
         }
     }
 }
