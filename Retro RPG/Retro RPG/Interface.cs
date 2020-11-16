@@ -24,7 +24,7 @@ namespace Final_Project
             Console.WriteLine(" AD: " + Player.Player_AD.ToString() + " | ");     // Skriver ut spelarens Attack damage
 
             //Skriver ut fiendens namn och stats
-            Console.SetCursorPosition( 0, 4);
+            Console.SetCursorPosition( 0, 5);
             Console.WriteLine (" Enemy: Name: " + Enemy.Name);       // skriver ut att det är fiendens stats som följer
             Console.Write(" HP: " + Enemy.HP.ToString() + " | ");      // skriver ut fiendens Hit points
             Console.Write(" Armor: " + Enemy.Armor.ToString() + " | ");      // skriver ut fiendens 

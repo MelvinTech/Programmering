@@ -1,9 +1,5 @@
 ﻿using Microsoft.Win32.SafeHandles;
 using System;
-using System.Data;
-using System.Net.Http.Headers;
-using System.Runtime.InteropServices;
-using System.Xml.Serialization;
 
 namespace Final_Project
 {
@@ -22,7 +18,7 @@ namespace Final_Project
         public static void Treasure_Room()
         {
             Random R_Amount = new Random();
-            int T_Amount = R_Amount.Next(0, 101) + 10 * Player.Player_Level;
+            int T_Amount = R_Amount.Next(0, 25) + 10 * Player.Player_Level;
 
             Game.Update();
             Console.SetCursorPosition(1, 6);
@@ -129,7 +125,7 @@ namespace Final_Project
         {
             Game.Update();
             Random random = new Random();
-            int encounter = random.Next(0, 4);
+            int encounter = random.Next(1, 4);
 
             if (encounter == 1)
             {

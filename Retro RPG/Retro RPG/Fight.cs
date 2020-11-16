@@ -26,6 +26,7 @@ namespace Final_Project
 
             if (Key == "1")
             {
+                Game.Update();
                 Battle();
             }
             else if (Key == "2")
@@ -121,8 +122,8 @@ namespace Final_Project
                 P_dodge();
             }
             else
-            {   
-                Console.Clear();
+            {
+                Game.Update();
                 Console.WriteLine("Command not recognised!");
                 Player_Round();
             }
@@ -155,30 +156,28 @@ namespace Final_Project
         void E_Slice()
         {
             Damage = Enemy.AD - Player.Player_Armor;
-            Player.Player_HP -= Math.Abs(Damage);
-            Game.Update();
+            Player_Damage();
         }
         void E_Stab()
         {
             Damage = Enemy.AD / 2 - Player.Player_Armor / 4;
-            Player.Player_HP -= Math.Abs(Damage);
-            Game.Update();
+            Player_Damage();
         }
         void E_Shield()
         {
-            Enemy.Armor += 4;
+            Enemy.Armor += 5;
             Game.Update();
         }
 
         void P_slice()
         {
-            Enemy.HP -= Player.Player_AD - Enemy.Armor;
-            Game.Update();
+            Damage = Player.Player_AD - Enemy.Armor;
+            Enemy_Damage();
         }
         void P_stab()
         {
-            Enemy.HP -= Player.Player_AD / 2 - Enemy.Armor / 4;
-            Game.Update();
+            Damage = Player.Player_AD / 2 - Enemy.Armor / 4;
+            Enemy_Damage();
         }
         void P_shield()
         {
@@ -190,6 +189,19 @@ namespace Final_Project
             Player.Player_Armor += 2;
             Game.Update();
         }
-
+        void Player_Damage()
+        {
+            if (Damage < 0)
+            {
+                Damage = 0;
+            }
+            Player.Player_HP -= Damage;
+            Game.Update();
+        }
+        void Enemy_Damage()
+        {
+            Enemy.HP -= Damage;
+            Game.Update();
+        }
     }
 }

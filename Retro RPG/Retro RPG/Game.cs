@@ -10,7 +10,6 @@ namespace Final_Project
 
         public static void Main()
         {
-            Game_Over();
             new Player();
 
             new Game_Room();
@@ -27,6 +26,7 @@ namespace Final_Project
             {
                 Player.Level();
                 Interface.Update_Interface();
+                Console.SetCursorPosition(0,10);
             }
         }
         public static void Game_Over()
@@ -37,7 +37,6 @@ namespace Final_Project
             Console.WriteLine("Press any key to continue...");
             Console.ReadLine();
             Environment.Exit(1);
-
         }
     }
 }
