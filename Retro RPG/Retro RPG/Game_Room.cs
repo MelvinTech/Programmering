@@ -8,20 +8,20 @@ namespace Final_Project
         public static string Went_Path;
         static int Nr_Paths = 0;
        
-        public Game_Room()
+        public Game_Room() // skapar ett nytt rum
         {
             Nr_Path();
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public static void Treasure_Room()
+        public static void Treasure_Room() // Representerar ett nytt rum med en skattkista med poäng
         {
             Random R_Amount = new Random();
             int T_Amount = R_Amount.Next(0, 25) + 10 * Player.Player_Level;
 
             Game.Update();
-            Console.SetCursorPosition(1, 6);
+            Console.SetCursorPosition(1, 7);
             Console.WriteLine("You have entered a treasure room! You found " + T_Amount.ToString() + " Points!");
             Console.ReadLine();
 
@@ -30,7 +30,7 @@ namespace Final_Project
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
-        public static void Nr_Path()
+        public static void Nr_Path() // Representerar antalet vägar som spelaren kan gå
         {
             Random Path_Gen = new Random();
             Nr_Paths = Path_Gen.Next(1, 4);
@@ -50,7 +50,7 @@ namespace Final_Project
 
         }
   
-        public static void Single_Path()
+        public static void Single_Path() // det finns en stig som spelaren kan ta
         {
             Console.SetCursorPosition(0, Console.WindowHeight / 2);
             Console.WriteLine("You can only go forward!");
@@ -60,7 +60,7 @@ namespace Final_Project
             if (choice == "1")
             {
                 Went_Path = "Forward";
-                Way();
+                In_Room();
             }
             else
             {
@@ -70,7 +70,7 @@ namespace Final_Project
             }
         }
 
-        static void Double_Path()
+        static void Double_Path()  // det finns två stigar som spelaren kan ta
         {
             Console.SetCursorPosition(0, Console.WindowHeight / 2);
             Console.WriteLine(" You can go left and right!");
@@ -81,19 +81,19 @@ namespace Final_Project
             if (choice == "1")
             {
                 Went_Path = "Left";
-                Way();
+                In_Room();
             }
             if (choice == "2")
             {
                 Went_Path = "Right";
-                Way();
+                In_Room();
             }
             Game.Update();
             Double_Path();
             Console.WriteLine("Unrecognised command, please try again.");
         }
 
-        static void Triple_Path()
+        static void Triple_Path()  // det finns tre stigar som spelaren kan ta
         {
             Console.SetCursorPosition(0, Console.WindowHeight / 2);
             Console.WriteLine(" You can go left, right or center");
@@ -105,23 +105,23 @@ namespace Final_Project
             if (choice == "1")
             {
                 Went_Path = "Forward";
-                Way();
+                In_Room();
             }
             if (choice == "2")
             {
                 Went_Path = "Left";
-                Way();
+                In_Room();
             }
             if (choice == "3")
             {
                 Went_Path = "right";
-                Way();
+                In_Room();
             }
             Game.Update();
             Triple_Path();
             Console.WriteLine("Unrecognised command, please try again.");
         }
-        static void Way()
+        static void In_Room() // väljer vad som finns i rummet
         {
             Game.Update();
             Random random = new Random();

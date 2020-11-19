@@ -29,6 +29,9 @@ namespace Final_Project
             Console.Write(" HP: " + Enemy.HP.ToString() + " | ");      // skriver ut fiendens Hit points
             Console.Write(" Armor: " + Enemy.Armor.ToString() + " | ");      // skriver ut fiendens 
             Console.WriteLine(" AD: " + Enemy.AD.ToString() + " | ");      // skriver ut fiendens attack damage
+
+            Console.SetCursorPosition(0, (Console.WindowHeight - 2));
+            Console.WriteLine(" Points: " + Game.Score.ToString());
         }
     }
 }

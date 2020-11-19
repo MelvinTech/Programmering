@@ -35,7 +35,7 @@ namespace Final_Project
             Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
             Console.WriteLine("Game Over: Final Score: " + Score.ToString());
             Console.WriteLine("Press any key to continue...");
-            Console.ReadLine();
+            Console.ReadKey();
             Environment.Exit(1);
         }
     }
