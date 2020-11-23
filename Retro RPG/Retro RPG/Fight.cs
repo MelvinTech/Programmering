@@ -19,9 +19,9 @@ namespace Final_Project
 
         void Fight_choice()
         {
-            Console.WriteLine("Do you wish to fight this beast for loot and glory?");
-            Console.WriteLine("1. Yes");
-            Console.WriteLine("2. No (Lose points for cowardice)");
+            Console.WriteLine(" Do you wish to fight this beast for loot and glory?");
+            Console.WriteLine(" 1. Yes");
+            Console.WriteLine(" 2. No (Lose points for cowardice)");
             string Key = Console.ReadLine();
 
             if (Key == "1")
@@ -49,6 +49,7 @@ namespace Final_Project
             if (Enemy.HP <= 0)
             {
                 Battle_Score();
+                new Game_Room();
             }
             else if (Player.Player_HP <= 0)
             {
@@ -102,6 +103,7 @@ namespace Final_Project
             Console.WriteLine("2. Stab at enemy");
             Console.WriteLine("3. Raise shield");
             Console.WriteLine("4. Dodge attack");
+            Console.WriteLine("5. Shred armor");
 
             string ans = Console.ReadLine();
 
@@ -120,6 +122,10 @@ namespace Final_Project
             else if (ans == "4")
             {
                 P_dodge();
+            }
+            else if (ans == "5")
+            {
+                P_shred();
             }
             else
             {
@@ -189,6 +195,11 @@ namespace Final_Project
             Player.Player_Armor += 2;
             Game.Update();
         }
+        void P_shred()
+        {
+            Enemy.Armor -= Player.Player_AD / 3;
+            Game.Update();
+        }
         void Player_Damage()
         {
             if (Damage < 0)
@@ -200,6 +211,10 @@ namespace Final_Project
         }
         void Enemy_Damage()
         {
+            if (Damage < 0)
+            {
+                Damage = 0;
+            }
             Enemy.HP -= Damage;
             Game.Update();
         }

@@ -6,7 +6,7 @@ namespace Final_Project
     {
         public static string Name;
         public static int HP = 0;
-        public static int Armor =0;
+        public static int Armor = 0;
         public static int AD = 0;
         public static int Level_stats = 0;
 
@@ -59,7 +59,7 @@ namespace Final_Project
             Name = "Witch";
             HP = 15 + Level_stats;
             Armor = 0 + Level_stats;
-            AD = 70 + Level_stats;
+            AD = 20 + Level_stats;
         }
         public static void RaidBoss()
         {

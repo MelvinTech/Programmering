@@ -22,8 +22,9 @@ namespace Final_Project
 
             Game.Update();
             Console.SetCursorPosition(1, 7);
+            Game.Score += T_Amount;
             Console.WriteLine("You have entered a treasure room! You found " + T_Amount.ToString() + " Points!");
-            Console.ReadLine();
+            Console.ReadKey();
 
             new Game_Room();
         }
@@ -131,13 +132,17 @@ namespace Final_Project
             {
                 new Fight();
             }
-            if (encounter == 2)
+            else if (encounter == 2)
             {
                 Treasure_Room();
             }
-            if (encounter == 3)
+            else if (encounter == 3 || encounter == 4)
             {
                 new Game_Room();
+            }
+            else
+            {
+                throw new Exception("In_Room something is wrong!");
             }
         }
     }
