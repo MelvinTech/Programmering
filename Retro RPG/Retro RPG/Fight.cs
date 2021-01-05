@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks.Dataflow;
 
 namespace Final_Project
 {
@@ -31,8 +28,8 @@ namespace Final_Project
             }
             else if (Key == "2")
             {
-                Game.Update();
                 Game.Score -= 20;
+                Game.Update();
                 new Game_Room();
             }
             else
@@ -142,7 +139,7 @@ namespace Final_Project
         {
             P_Round = false;
             Random Ac = new Random();
-            int num = Ac.Next(0, 4);
+            int num = Ac.Next(1, 4);
 
             if (num == 1)
             {
@@ -155,6 +152,10 @@ namespace Final_Project
             else if (num == 3)
             {
                 E_Shield();
+            }
+            else if (num == 4)
+            {
+                E_Shred();
             }
 
             Battle();
@@ -173,6 +174,14 @@ namespace Final_Project
         {
             Enemy.Armor += 5;
             Game.Update();
+        }
+        void E_Shred()
+        {
+            Player.Player_Armor -= 20;
+            if (Player.Player_Armor < 0)
+            {
+                Player.Player_Armor = 0;
+            }
         }
 
         void P_slice()
@@ -198,6 +207,10 @@ namespace Final_Project
         void P_shred()
         {
             Enemy.Armor -= Player.Player_AD / 3;
+            if (Enemy.Armor < 0)
+            {
+                Enemy.Armor = 0;
+            }
             Game.Update();
         }
         void Player_Damage()

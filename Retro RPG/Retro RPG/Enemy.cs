@@ -24,7 +24,7 @@ namespace Final_Project
             {
                 Orc(); // Väljer Orc som motståndare och ger dess stats
             }
-            else if (num > 666 && num < 999) 
+            else if (num > 666 && num < 999)
             {
                 Witch(); // Väljer Witch som motståndare och ger dess stats
             }
@@ -45,7 +45,7 @@ namespace Final_Project
             Name = "Goblin";
             HP = 20 + Level_stats;
             Armor = -5 + Level_stats;
-            AD = 10 + Level_stats;    
+            AD = 10 + Level_stats;
         }
         public static void Orc()
         {

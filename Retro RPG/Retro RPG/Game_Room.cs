@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32.SafeHandles;
-using System;
+﻿using System;
 
 namespace Final_Project
 {
@@ -7,7 +6,7 @@ namespace Final_Project
     {
         public static string Went_Path;
         static int Nr_Paths = 0;
-       
+
         public Game_Room() // skapar ett nytt rum
         {
             Nr_Path();
@@ -21,7 +20,7 @@ namespace Final_Project
             int T_Amount = R_Amount.Next(0, 25) + 10 * Player.Player_Level;
 
             Game.Update();
-            Console.SetCursorPosition(1, 7);
+            Console.SetCursorPosition(0, 8);
             Game.Score += T_Amount;
             Console.WriteLine("You have entered a treasure room! You found " + T_Amount.ToString() + " Points!");
             Console.ReadKey();
@@ -30,7 +29,7 @@ namespace Final_Project
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
+
         public static void Nr_Path() // Representerar antalet vägar som spelaren kan gå
         {
             Random Path_Gen = new Random();
@@ -50,7 +49,7 @@ namespace Final_Project
             }
 
         }
-  
+
         public static void Single_Path() // det finns en stig som spelaren kan ta
         {
             Console.SetCursorPosition(0, Console.WindowHeight / 2);

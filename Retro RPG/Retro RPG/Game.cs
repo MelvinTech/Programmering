@@ -1,7 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Diagnostics;
-using System.Threading;
 
 namespace Final_Project
 {
@@ -15,7 +12,7 @@ namespace Final_Project
 
 
             new Game_Room();
-            
+
             // OBS! lägg till ordentlig startfunktion
         }
 
@@ -29,7 +26,7 @@ namespace Final_Project
             {
                 Player.Level();
                 Interface.Update_Interface();
-                Console.SetCursorPosition(0,10);
+                Console.SetCursorPosition(0, 10);
             }
         }
         public static void Game_Over()

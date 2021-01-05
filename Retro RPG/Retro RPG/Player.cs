@@ -12,16 +12,16 @@ namespace Final_Project
         public static string Player_Name;
         public static int Player_Level = 1;
         public static int Player_Exp = 0;
-        
+
         public Player() // OBS! ändra!
         {
-            Console.SetCursorPosition(0, Console.WindowHeight / 3/2);
+            Console.SetCursorPosition(0, Console.WindowHeight / 3 / 2);
             Console.WriteLine("Welcome adventurer, what is thy name?");
             Player_Name = Console.ReadLine();
         }
         public static void Level() // kollar ifall spelaren har tillräkligt mycket exp för att gå upp en level
         {
-            if ( Player_Exp >= 100)
+            if (Player_Exp >= 100)
             {
                 Level_up();
             }
