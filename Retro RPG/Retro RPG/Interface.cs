@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Final_Project
+namespace Retro_RPG
 {
     public class Interface
     {
@@ -19,6 +19,7 @@ namespace Final_Project
 
             Console.WriteLine(" Player: Name: " + Player.Player_Name);  // skriver ut att det är spelaren stats som följer   
             Console.WriteLine(" Level: " + Player.Player_Level);
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write(" HP: " + Player.Player_HP.ToString() + " | ");       // Skriver ut spelarens hitpoints
             Console.Write(" Armor: " + Player.Player_Armor.ToString() + " | ");     // Skriver ut spelarens armor
             Console.WriteLine(" AD: " + Player.Player_AD.ToString() + " | ");     // Skriver ut spelarens Attack damage

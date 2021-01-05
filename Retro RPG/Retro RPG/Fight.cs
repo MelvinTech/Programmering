@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Final_Project
+namespace Retro_RPG
 {
     class Fight
     {
