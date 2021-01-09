@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Retro_RPG
 {
@@ -14,18 +15,58 @@ namespace Retro_RPG
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public static void Treasure_Room() // Representerar ett nytt rum med en skattkista med poäng
+        static string last_item_name;
+        static int last_item_AD;
+        static int last_item_armor;
+
+        public static void Treasure_Room() // Representerar ett nytt rum med chans att innehålla utrustning
         {
-            Random R_Amount = new Random();
-            int T_Amount = R_Amount.Next(0, 25) + 10 * Player.Player_Level;
+            last_item_name = Item.item_name;
+            last_item_AD = Item.item_AD;
+            last_item_armor = Item.item_armor;
+
+            new Item();
 
             Game.Update();
             Console.SetCursorPosition(0, 8);
-            Game.Score += T_Amount;
-            Console.WriteLine("You have entered a treasure room! You found " + T_Amount.ToString() + " Points!");
-            Console.ReadKey();
+            Console.WriteLine("When you search the small room you find (a) " + Item.item_name + ".");
+            Console.WriteLine("Do you want to use the item? (You can ony use one item at the same time!)");
+            Console.WriteLine("");
+            Console.WriteLine("Current item: " + last_item_name);
+            Console.WriteLine("Current stats: AD: " + last_item_AD + " armor: " + last_item_armor);
+            Console.WriteLine(" ");
+            Console.WriteLine("New item: " + Item.item_name);
+            Console.WriteLine("New stats: AD: " + Item.item_AD + " armor:" + Item.item_armor);
+            Tanswer();
+        }
+        private static void Tanswer()
+        {
+            Console.WriteLine(" ");
+            Console.WriteLine("1. Yes");
+            Console.WriteLine("2. No");
+            string ans = Console.ReadLine();
 
-            new Game_Room();
+            if (ans == "1")
+            {
+                Player.Player_AD -= last_item_AD;
+                Player.Player_Armor -= last_item_armor;
+
+                Player.Player_AD += Item.item_AD;
+                Player.Player_Armor += Item.item_armor;
+
+                Game.Update();
+
+                new Game_Room();
+            }
+            else if (ans == "2")
+            {
+                new Game_Room();
+            }
+            else
+            {
+                Console.WriteLine("Incorrect command, please try again");
+                Tanswer();
+            }
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
