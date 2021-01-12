@@ -15,28 +15,26 @@ namespace Retro_RPG
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        static string last_item_name;
-        static int last_item_AD;
-        static int last_item_armor;
+        private static string used_item_name = "Broken dagger";
+        private static int used_item_AD;
+        private static int used_item_armor;
 
         public static void Treasure_Room() // Representerar ett nytt rum med chans att innehålla utrustning
         {
-            last_item_name = Item.item_name;
-            last_item_AD = Item.item_AD;
-            last_item_armor = Item.item_armor;
 
             new Item();
 
             Game.Update();
             Console.SetCursorPosition(0, 8);
-            Console.WriteLine("When you search the small room you find (a) " + Item.item_name + ".");
+            Console.WriteLine("When you search the small room you find (a) " + Item.Name_get() + ".");
             Console.WriteLine("Do you want to use the item? (You can ony use one item at the same time!)");
-            Console.WriteLine("");
-            Console.WriteLine("Current item: " + last_item_name);
-            Console.WriteLine("Current stats: AD: " + last_item_AD + " armor: " + last_item_armor);
             Console.WriteLine(" ");
-            Console.WriteLine("New item: " + Item.item_name);
-            Console.WriteLine("New stats: AD: " + Item.item_AD + " armor:" + Item.item_armor);
+            Console.WriteLine("Current item: " + used_item_name);
+            Console.WriteLine("Current stats: AD: " + used_item_AD + " armor: " + used_item_armor);
+            Console.WriteLine(" ");
+            Console.WriteLine("New item: " + Item.Name_get());
+            Console.WriteLine("New stats: AD: " + Item.AD_get() + " armor:" + Item.Armor_get());
+
             Tanswer();
         }
         private static void Tanswer()
@@ -48,11 +46,18 @@ namespace Retro_RPG
 
             if (ans == "1")
             {
-                Player.Player_AD -= last_item_AD;
-                Player.Player_Armor -= last_item_armor;
+                int got_AD = Item.AD_get();
+                int got_armor = Item.Armor_get();
 
-                Player.Player_AD += Item.item_AD;
-                Player.Player_Armor += Item.item_armor;
+                Player.PAD_set(-used_item_AD);
+                Player.Parmor_set(-used_item_armor);
+
+                Player.PAD_set(got_AD);
+                Player.Parmor_set(got_armor);
+
+                used_item_name = Item.Name_get();
+                used_item_AD = Item.AD_get();
+                used_item_armor = Item.Armor_get();
 
                 Game.Update();
 
@@ -60,6 +65,7 @@ namespace Retro_RPG
             }
             else if (ans == "2")
             {
+                Game.Update();
                 new Game_Room();
             }
             else

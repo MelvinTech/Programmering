@@ -5,7 +5,7 @@ namespace Retro_RPG
     class Fight
     {
         private bool P_Round = false;
-        int Damage = 0;
+        private double Damage = 0;
 
         public Fight()
         {
@@ -64,25 +64,26 @@ namespace Retro_RPG
         }
         public static void Battle_Score()
         {
+
             if (Enemy.Name == "Goblin")
             {
                 Game.Score += 10;
-                Player.Player_Exp += 10;
+                Player.Pexp_set(10);
             }
             else if (Enemy.Name == "Orc")
             {
                 Game.Score += 20;
-                Player.Player_Exp += 20;
+                Player.Pexp_set(20);
             }
             else if (Enemy.Name == "Witch")
             {
                 Game.Score += 30;
-                Player.Player_Exp += 40;
+                Player.Pexp_set(30);
             }
             else if (Enemy.Name == "RaidBoss")
             {
                 Game.Score += 2000;
-                Player.Player_Exp += 2000;
+                Player.Pexp_set(2000);
             }
             else
             {
@@ -139,7 +140,7 @@ namespace Retro_RPG
         {
             P_Round = false;
             Random Ac = new Random();
-            int num = Ac.Next(1, 4);
+            int num = Ac.Next(0, 5);
 
             if (num == 1)
             {
@@ -160,14 +161,19 @@ namespace Retro_RPG
 
             Battle();
         }
+
+        static double PAD = Player.PAD_get();
+        static double Parmor = Player.Parmor_get();
+        
+
         void E_Slice()
         {
-            Damage = Enemy.AD - Player.Player_Armor;
+            Damage = Enemy.AD - Player.Parmor_get();
             Player_Damage();
         }
         void E_Stab()
         {
-            Damage = Enemy.AD / 2 - Player.Player_Armor / 4;
+            Damage = Enemy.AD / 2 - Parmor / 4;
             Player_Damage();
         }
         void E_Shield()
@@ -177,36 +183,32 @@ namespace Retro_RPG
         }
         void E_Shred()
         {
-            Player.Player_Armor -= 20;
-            if (Player.Player_Armor < 0)
-            {
-                Player.Player_Armor = 0;
-            }
+            Player.Parmor_set(-20);
         }
 
         void P_slice()
         {
-            Damage = Player.Player_AD - Enemy.Armor;
+            Damage = Player.PAD_get() - Enemy.Armor;
             Enemy_Damage();
         }
         void P_stab()
         {
-            Damage = Player.Player_AD / 2 - Enemy.Armor / 4;
+            Damage = Player.PAD_get() / 2 - Enemy.Armor / 4;
             Enemy_Damage();
         }
         void P_shield()
         {
-            Player.Player_Armor += 5;
+            Player.Parmor_set(5);
             Game.Update();
         }
         void P_dodge()
         {
-            Player.Player_Armor += 2;
+            Player.Parmor_set(2);
             Game.Update();
         }
         void P_shred()
         {
-            Enemy.Armor -= Player.Player_AD / 3;
+            Enemy.Armor -= Player.PAD_get() / 3;
             if (Enemy.Armor < 0)
             {
                 Enemy.Armor = 0;

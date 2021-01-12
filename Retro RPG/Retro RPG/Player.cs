@@ -6,12 +6,36 @@ namespace Retro_RPG
     {
         // obs! test data
 
-        public static int Player_HP = 30;
-        public static int Player_AD = 20;
-        public static int Player_Armor = 10;
-        public static string Player_Name;
-        public static int Player_Level = 1;
-        public static int Player_Exp = 0;
+        public static double Player_HP = 30;
+        private static double Player_AD = 20;
+        private static double Player_Armor = 10;
+        private static string Player_Name;
+        private static double Player_Level = 1;
+        private static double Player_Exp = 0;
+
+        public static string Pname_get() { return Player_Name; }
+
+        public static void PAD_set(double AD_change) { Player_AD += AD_change; }
+        public static double PAD_get() { return Player_AD; }
+
+        public static void Parmor_set(double armor_change) 
+        {
+            double DParmor = Player_Armor;
+
+            if ((DParmor += armor_change) < 0)
+            {
+                Player_Armor = 0;
+            }
+            else
+            {
+                Player_Armor += armor_change;
+            }
+        }
+        public static double Parmor_get() { return Player_Armor; }
+
+        public static double Plevel_get() { return Player_Level; }
+
+        public static void Pexp_set(double EXP_change) { Player_Exp += EXP_change;}
 
         public Player() // OBS! ändra!
         {

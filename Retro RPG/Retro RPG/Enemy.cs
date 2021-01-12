@@ -5,10 +5,10 @@ namespace Retro_RPG
     public class Enemy
     {
         public static string Name;
-        public static int HP = 0;
-        public static int Armor = 0;
-        public static int AD = 0;
-        public static int Level_stats = 0;
+        public static double HP = 0;
+        public static double Armor = 0;
+        public static double AD = 0;
+        public static double Level_stats = 0;
 
         public Enemy()
         {
@@ -35,7 +35,7 @@ namespace Retro_RPG
         }
         private void Bonus_Stats() // lägger till mer stats för att motverka spelarens ökande styrkor.
         {
-            Level_stats = 10 * Player.Player_Level;
+            Level_stats = 10 * Player.Plevel_get();
         }
 
         // följande metoder bestämmer fiendens stats
