@@ -12,12 +12,11 @@ namespace Retro_RPG
         private static string part2;
         private static string part3;
 
-        public static void Name_set(string name) { item_name = name; }
-        public static string Name_get() { return item_name; }
+        public static string Item_name { get { return item_name; } }
         
-        public static int AD_get() { return item_AD; }
+        public static int Item_AD { get { return item_AD; } }
 
-        public static int Armor_get() { return item_armor; }
+        public static int Item_armor { get { return item_armor; } }
         public Item()
         {
             item_AD = 10;

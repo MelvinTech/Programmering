@@ -5,7 +5,6 @@ namespace Retro_RPG
 {
     class Game_Room
     {
-        public static string Went_Path;
         static int Nr_Paths = 0;
 
         public Game_Room() // skapar ett nytt rum
@@ -26,38 +25,35 @@ namespace Retro_RPG
 
             Game.Update();
             Console.SetCursorPosition(0, 8);
-            Console.WriteLine("When you search the small room you find (a) " + Item.Name_get() + ".");
+            Console.WriteLine("When you search the small room you find (a) " + Item.Item_name + ".");
             Console.WriteLine("Do you want to use the item? (You can ony use one item at the same time!)");
-            Console.WriteLine(" ");
-            Console.WriteLine("Current item: " + used_item_name);
+            Console.WriteLine("\nCurrent item: " + used_item_name);
             Console.WriteLine("Current stats: AD: " + used_item_AD + " armor: " + used_item_armor);
-            Console.WriteLine(" ");
-            Console.WriteLine("New item: " + Item.Name_get());
-            Console.WriteLine("New stats: AD: " + Item.AD_get() + " armor:" + Item.Armor_get());
+            
+            Console.WriteLine("\nNew item: " + Item.Item_name);
+            Console.WriteLine("New stats: AD: " + Item.Item_AD + " armor:" + Item.Item_armor);
 
             Tanswer();
         }
         private static void Tanswer()
         {
-            Console.WriteLine(" ");
-            Console.WriteLine("1. Yes");
-            Console.WriteLine("2. No");
+            Console.WriteLine("\n1. Yes \n2. No");
             string ans = Console.ReadLine();
 
             if (ans == "1")
             {
-                int got_AD = Item.AD_get();
-                int got_armor = Item.Armor_get();
+                int got_AD = Item.Item_AD;
+                int got_armor = Item.Item_armor;
 
-                Player.PAD_set(-used_item_AD);
-                Player.Parmor_set(-used_item_armor);
+                Player.Player_AD = -used_item_AD;
+                Player.Player_Armor = -used_item_armor;
 
-                Player.PAD_set(got_AD);
-                Player.Parmor_set(got_armor);
+                Player.Player_AD = got_AD;
+                Player.Player_Armor = got_armor;
 
-                used_item_name = Item.Name_get();
-                used_item_AD = Item.AD_get();
-                used_item_armor = Item.Armor_get();
+                used_item_name = Item.Item_name;
+                used_item_AD = got_AD;
+                used_item_armor = got_armor;
 
                 Game.Update();
 
@@ -106,7 +102,6 @@ namespace Retro_RPG
 
             if (choice == "1")
             {
-                Went_Path = "Forward";
                 In_Room();
             }
             else
@@ -127,12 +122,10 @@ namespace Retro_RPG
 
             if (choice == "1")
             {
-                Went_Path = "Left";
                 In_Room();
             }
             if (choice == "2")
             {
-                Went_Path = "Right";
                 In_Room();
             }
             Game.Update();
@@ -151,17 +144,14 @@ namespace Retro_RPG
 
             if (choice == "1")
             {
-                Went_Path = "Forward";
                 In_Room();
             }
             if (choice == "2")
             {
-                Went_Path = "Left";
                 In_Room();
             }
             if (choice == "3")
             {
-                Went_Path = "right";
                 In_Room();
             }
             Game.Update();

@@ -6,57 +6,66 @@ namespace Retro_RPG
     {
         // obs! test data
 
-        public static double Player_HP = 30;
-        private static double Player_AD = 20;
-        private static double Player_Armor = 10;
-        private static string Player_Name;
-        private static double Player_Level = 1;
-        private static double Player_Exp = 0;
+        public static int Player_HP = 30;
+        private static int player_AD = 20;
+        private static int player_Armor = 10;
+        private static string player_Name;
+        private static int player_Level = 1;
+        private static int player_Exp = 0;
 
-        public static string Pname_get() { return Player_Name; }
+        public static string Player_name { get { return player_Name; } }
 
-        public static void PAD_set(double AD_change) { Player_AD += AD_change; }
-        public static double PAD_get() { return Player_AD; }
-
-        public static void Parmor_set(double armor_change) 
+        public static int Player_level { get { return player_Level; } }
+        
+        public static int Player_Exp { set { player_Exp += value; } }
+        
+        public static int Player_AD
         {
-            double DParmor = Player_Armor;
+            get { return player_AD; }
+            set
+            {
+                player_AD += value;
 
-            if ((DParmor += armor_change) < 0)
-            {
-                Player_Armor = 0;
-            }
-            else
-            {
-                Player_Armor += armor_change;
+                if (player_AD < 0)
+                {
+                    player_AD = 0;
+                }
             }
         }
-        public static double Parmor_get() { return Player_Armor; }
 
-        public static double Plevel_get() { return Player_Level; }
-
-        public static void Pexp_set(double EXP_change) { Player_Exp += EXP_change;}
+        public static int Player_Armor
+        {
+            get { return player_Armor; }
+            set
+            {
+                player_Armor += value;
+                if (player_Armor < 0)
+                {
+                    player_Armor = 0;
+                }
+            }
+        }
 
         public Player() // OBS! ändra!
         {
             Console.SetCursorPosition(0, Console.WindowHeight / 3 / 2);
             Console.WriteLine("Welcome adventurer, what is thy name?");
-            Player_Name = Console.ReadLine();
+            player_Name = Console.ReadLine();
         }
         public static void Level() // kollar ifall spelaren har tillräkligt mycket exp för att gå upp en level
         {
-            if (Player_Exp >= 100)
+            if (player_Exp >= 100)
             {
                 Level_up();
             }
         }
         private static void Level_up() // Höjer spelarens level med 1
         {
-            Player_Level++;
-            Player_Exp -= 100;
+            player_Level++;
+            player_Exp -= 100;
             Player_HP += 20;
-            Player_AD += 5;
-            Player_Armor += 10;
+            player_AD += 5;
+            player_Armor += 10;
         }
     }
 

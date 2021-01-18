@@ -4,11 +4,47 @@ namespace Retro_RPG
 {
     public class Enemy
     {
-        public static string Name;
-        public static double HP = 0;
-        public static double Armor = 0;
-        public static double AD = 0;
-        public static double Level_stats = 0;
+        private static string enemy_name;
+        private static int enemy_HP = 0;
+        private static int enemy_armor = 0;
+        private static int enemy_AD = 0;
+        private static int Level_stats = 0;
+
+        public static string Enemy_name { get { return enemy_name; }}
+
+        public static int Enemy_HP
+        {
+            get { return enemy_HP; }
+            set { enemy_HP += value; }
+        }
+
+        public static int Enemy_armor
+        {
+            get { return enemy_armor; }
+            set
+            {
+                enemy_armor += value;
+
+                if (enemy_armor < 0)
+                {
+                    enemy_armor = 0;
+                }
+            }
+        }
+
+        public static int Enemy_AD
+        {
+            get { return enemy_AD; }
+            set 
+            {
+                enemy_AD += value;
+
+                if (enemy_AD < 0)
+                {
+                    enemy_AD = 0;
+                }
+            }
+        }
 
         public Enemy()
         {
@@ -35,38 +71,38 @@ namespace Retro_RPG
         }
         private void Bonus_Stats() // lägger till mer stats för att motverka spelarens ökande styrkor.
         {
-            Level_stats = 10 * Player.Plevel_get();
+            Level_stats = 10 * Player.Player_level;
         }
 
         // följande metoder bestämmer fiendens stats
         // OBS! Test data för alla motståndare ändra senare för balancing 
         public static void Goblin()
         {
-            Name = "Goblin";
-            HP = 20 + Level_stats;
-            Armor = -5 + Level_stats;
-            AD = 10 + Level_stats;
+            enemy_name = "Goblin";
+            enemy_HP = 20 + Level_stats;
+            enemy_armor = -5 + Level_stats;
+            enemy_AD = 10 + Level_stats;
         }
         public static void Orc()
         {
-            Name = "Orc";
-            HP = 40 + Level_stats;
-            Armor = -2 + Level_stats;
-            AD = 6 + Level_stats;
+            enemy_name = "Orc";
+            enemy_HP = 40 + Level_stats;
+            enemy_armor = -2 + Level_stats;
+            enemy_AD = 6 + Level_stats;
         }
         public static void Witch()
         {
-            Name = "Witch";
-            HP = 15 + Level_stats;
-            Armor = 0 + Level_stats;
-            AD = 20 + Level_stats;
+            enemy_name = "Witch";
+            enemy_HP = 15 + Level_stats;
+            enemy_armor = 0 + Level_stats;
+            enemy_AD = 20 + Level_stats;
         }
         public static void RaidBoss()
         {
-            Name = "RaidBoss";
-            HP = 350 + Level_stats;
-            Armor = 70 + Level_stats;
-            AD = 120 + Level_stats;
+            enemy_name = "RaidBoss";
+            enemy_HP = 350 + Level_stats;
+            enemy_armor = 70 + Level_stats;
+            enemy_AD = 120 + Level_stats;
         }
     }
 }

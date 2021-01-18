@@ -5,7 +5,7 @@ namespace Retro_RPG
     class Fight
     {
         private bool P_Round = false;
-        private double Damage = 0;
+        private int Damage = 0;
 
         public Fight()
         {
@@ -41,9 +41,20 @@ namespace Retro_RPG
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        static int PAD = 0;
+        static int Parmor = 0;
+        static int EAD = 0;
+        static int Earmor = 0;
+
         void Battle()
         {
-            if (Enemy.HP <= 0)
+            PAD = Player.Player_AD;
+            Parmor = Player.Player_Armor;
+
+            EAD = Enemy.Enemy_AD;
+            Earmor = Enemy.Enemy_armor;
+
+            if (Enemy.Enemy_HP <= 0)
             {
                 Battle_Score();
                 new Game_Room();
@@ -64,26 +75,27 @@ namespace Retro_RPG
         }
         public static void Battle_Score()
         {
+            string name = Enemy.Enemy_name;
 
-            if (Enemy.Name == "Goblin")
+            if (name == "Goblin")
             {
                 Game.Score += 10;
-                Player.Pexp_set(10);
+                Player.Player_Exp = 10;
             }
-            else if (Enemy.Name == "Orc")
+            else if (name == "Orc")
             {
                 Game.Score += 20;
-                Player.Pexp_set(20);
+                Player.Player_Exp = 20;
             }
-            else if (Enemy.Name == "Witch")
+            else if (name == "Witch")
             {
                 Game.Score += 30;
-                Player.Pexp_set(30);
+                Player.Player_Exp = 30;
             }
-            else if (Enemy.Name == "RaidBoss")
+            else if (name == "RaidBoss")
             {
                 Game.Score += 2000;
-                Player.Pexp_set(2000);
+                Player.Player_Exp = 2000;
             }
             else
             {
@@ -162,56 +174,52 @@ namespace Retro_RPG
             Battle();
         }
 
-        static double PAD = Player.PAD_get();
-        static double Parmor = Player.Parmor_get();
-        
-
         void E_Slice()
         {
-            Damage = Enemy.AD - Player.Parmor_get();
+            Damage = EAD - Parmor;
             Player_Damage();
         }
         void E_Stab()
         {
-            Damage = Enemy.AD / 2 - Parmor / 4;
+            Damage = EAD / 2 - Parmor / 4;
             Player_Damage();
         }
         void E_Shield()
         {
-            Enemy.Armor += 5;
+            Earmor += 5;
             Game.Update();
         }
         void E_Shred()
         {
-            Player.Parmor_set(-20);
+            Player.Player_Armor = -20;
         }
 
         void P_slice()
         {
-            Damage = Player.PAD_get() - Enemy.Armor;
+            Damage = PAD - Earmor;
             Enemy_Damage();
         }
         void P_stab()
         {
-            Damage = Player.PAD_get() / 2 - Enemy.Armor / 4;
+            Damage = PAD / 2 - Earmor / 4;
             Enemy_Damage();
         }
         void P_shield()
         {
-            Player.Parmor_set(5);
+            Player.Player_Armor = 2;
             Game.Update();
         }
         void P_dodge()
         {
-            Player.Parmor_set(2);
+            Player.Player_Armor = 2;
             Game.Update();
         }
         void P_shred()
         {
-            Enemy.Armor -= Player.PAD_get() / 3;
-            if (Enemy.Armor < 0)
+            Enemy.Enemy_armor -= PAD / 3;
+            if (Enemy.Enemy_armor < 0)
             {
-                Enemy.Armor = 0;
+                Enemy.Enemy_armor = 0;
             }
             Game.Update();
         }
@@ -230,7 +238,7 @@ namespace Retro_RPG
             {
                 Damage = 0;
             }
-            Enemy.HP -= Damage;
+            Enemy.Enemy_HP -= Damage;
             Game.Update();
         }
     }
