@@ -2,20 +2,21 @@
 
 namespace Retro_RPG
 {
-    class Fight
+    class Combat
     {
         private bool P_Round = false;
-        private int Damage = 0;
+        private int damage = 0;
 
-        public Fight()
+        public Combat()
         {
             new Enemy();
             Game.Update();
-            Fight_choice();
+            Combat_choice();
         }
 
-        void Fight_choice()
+        void Combat_choice()
         {
+            Game.Cursor_standard_pos();
             Console.WriteLine(" Do you wish to fight this beast for loot and glory?");
             Console.WriteLine(" 1. Yes");
             Console.WriteLine(" 2. No (Lose points for cowardice)");
@@ -35,7 +36,8 @@ namespace Retro_RPG
             else
             {
                 Game.Update();
-                Fight_choice();
+                Game.Error_message();
+                Combat_choice();
             }
         }
 
@@ -66,11 +68,11 @@ namespace Retro_RPG
 
             else if (P_Round == false)
             {
-                Player_Round();
+                Player_round();
             }
             else if (P_Round == true)
             {
-                Enemy_Round();
+                Enemy_round();
             }
         }
         public static void Battle_Score()
@@ -105,7 +107,7 @@ namespace Retro_RPG
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        void Player_Round()
+        void Player_round()
         {
             P_Round = true;
             Console.WriteLine("What do you wish to do?");
@@ -140,69 +142,79 @@ namespace Retro_RPG
             else
             {
                 Game.Update();
-                Console.WriteLine("Command not recognised!");
-                Player_Round();
+                Game.Error_message();
+                Player_round();
             }
             Battle();
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        void Enemy_Round()
+        void Enemy_round()
         {
             P_Round = false;
             Random Ac = new Random();
-            int num = Ac.Next(0, 5);
+            int num = Ac.Next(1, 5);
 
             if (num == 1)
             {
-                E_Slice();
+                if (Parmor >= EAD)
+                {
+                    Enemy_round();
+                }
             }
             else if (num == 2)
             {
-                E_Stab();
+                E_stab();
             }
             else if (num == 3)
             {
-                E_Shield();
+                E_shield();
             }
             else if (num == 4)
             {
-                E_Shred();
+                if (Player.Player_Armor > 0)
+                {
+                    E_shred();
+                }
+                else
+                {
+                    Enemy_round();
+                }
             }
 
             Battle();
         }
 
-        void E_Slice()
+        void E_slice()
         {
-            Damage = EAD - Parmor;
-            Player_Damage();
+            damage = EAD - Parmor;
+            Player_damage();
         }
-        void E_Stab()
+        void E_stab()
         {
-            Damage = EAD / 2 - Parmor / 4;
-            Player_Damage();
+            damage = EAD / 2 - Parmor / 4;
+            Player_damage();
         }
-        void E_Shield()
+        void E_shield()
         {
             Earmor += 5;
             Game.Update();
         }
-        void E_Shred()
+        void E_shred()
         {
             Player.Player_Armor = -20;
         }
 
         void P_slice()
         {
-            Damage = PAD - Earmor;
-            Enemy_Damage();
+            damage = PAD - Earmor;
+            Enemy_damage();
         }
         void P_stab()
         {
-            Damage = PAD / 2 - Earmor / 4;
-            Enemy_Damage();
+            damage = PAD / 2 - Earmor / 4;
+            Enemy_damage();
         }
         void P_shield()
         {
@@ -223,22 +235,22 @@ namespace Retro_RPG
             }
             Game.Update();
         }
-        void Player_Damage()
+        void Player_damage()
         {
-            if (Damage < 0)
+            if (damage < 0)
             {
-                Damage = 0;
+                damage = 0;
             }
-            Player.Player_HP -= Damage;
+            Player.Player_HP = -damage;
             Game.Update();
         }
-        void Enemy_Damage()
+        void Enemy_damage()
         {
-            if (Damage < 0)
+            if (damage < 0)
             {
-                Damage = 0;
+                damage = 0;
             }
-            Enemy.Enemy_HP -= Damage;
+            Enemy.Enemy_HP = -damage;
             Game.Update();
         }
     }

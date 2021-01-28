@@ -37,6 +37,7 @@ namespace Retro_RPG
         }
         private static void Tanswer()
         {
+            Game.Cursor_standard_pos();
             Console.WriteLine("\n1. Yes \n2. No");
             string ans = Console.ReadLine();
 
@@ -66,7 +67,7 @@ namespace Retro_RPG
             }
             else
             {
-                Console.WriteLine("Incorrect command, please try again");
+                Game.Error_message();
                 Tanswer();
             }
         }
@@ -95,7 +96,7 @@ namespace Retro_RPG
 
         public static void Single_Path() // det finns en stig som spelaren kan ta
         {
-            Console.SetCursorPosition(0, Console.WindowHeight / 2);
+            Game.Cursor_standard_pos();
             Console.WriteLine("You can only go forward!");
             Console.WriteLine("1. Go forward");
             string choice = Console.ReadLine();
@@ -107,14 +108,14 @@ namespace Retro_RPG
             else
             {
                 Game.Update();
+                Game.Error_message();
                 Single_Path();
-                Console.WriteLine("Unrecognised command, please try again.");
             }
         }
 
         static void Double_Path()  // det finns två stigar som spelaren kan ta
         {
-            Console.SetCursorPosition(0, Console.WindowHeight / 2);
+            Game.Cursor_standard_pos();
             Console.WriteLine(" You can go left and right!");
             Console.WriteLine(" 1. Go left");
             Console.WriteLine(" 2. Go right");
@@ -124,18 +125,21 @@ namespace Retro_RPG
             {
                 In_Room();
             }
-            if (choice == "2")
+            else if (choice == "2")
             {
                 In_Room();
             }
-            Game.Update();
-            Double_Path();
-            Console.WriteLine("Unrecognised command, please try again.");
+            else
+            {
+                Game.Update();
+                Game.Error_message();
+                Triple_Path();
+            }
         }
 
         static void Triple_Path()  // det finns tre stigar som spelaren kan ta
         {
-            Console.SetCursorPosition(0, Console.WindowHeight / 2);
+            Game.Cursor_standard_pos();
             Console.WriteLine(" You can go left, right or center");
             Console.WriteLine(" 1. Go forward");
             Console.WriteLine(" 2. Go left");
@@ -146,17 +150,20 @@ namespace Retro_RPG
             {
                 In_Room();
             }
-            if (choice == "2")
+            else if (choice == "2")
             {
                 In_Room();
             }
-            if (choice == "3")
+            else if (choice == "3")
             {
                 In_Room();
             }
-            Game.Update();
-            Triple_Path();
-            Console.WriteLine("Unrecognised command, please try again.");
+            else
+            { 
+                Game.Update();
+                Game.Error_message();
+                Triple_Path();
+            }
         }
         static void In_Room() // väljer vad som finns i rummet
         {
@@ -166,7 +173,7 @@ namespace Retro_RPG
 
             if (encounter == 1)
             {
-                new Fight();
+                new Combat();
             }
             else if (encounter == 2)
             {
@@ -178,7 +185,7 @@ namespace Retro_RPG
             }
             else
             {
-                throw new Exception("In_Room something is wrong!");
+                throw new Exception("In_Room: something is wrong!");
             }
         }
     }
