@@ -10,7 +10,7 @@ namespace Retro_RPG
         public static int Score = 0;
         private static int error_pos_x = 1;
         private static int error_pos_y = Console.WindowHeight - 3;
-        private static int standard_pos_x = 1;
+        private static int standard_pos_x = 0;
         private static int standard_pos_y = Console.WindowHeight / 2;
 
         private static string error_command = "Unrecognised command, please try again.";
@@ -51,7 +51,7 @@ namespace Retro_RPG
         public static void Game_Over()
         {
             Console.Clear();
-            Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
+            Console.SetCursorPosition(standard_pos_x, standard_pos_y);
             Console.WriteLine("Game Over: Final Score: " + Score.ToString());
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();

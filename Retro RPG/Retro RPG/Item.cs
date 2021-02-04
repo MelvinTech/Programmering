@@ -24,6 +24,7 @@ namespace Retro_RPG
         public static int Item_AD { get { return item_AD; } }
 
         public static int Item_armor { get { return item_armor; } }
+
         public Item()
         {
             item_AD = 0;

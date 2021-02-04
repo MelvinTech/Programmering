@@ -17,9 +17,9 @@ namespace Retro_RPG
         void Combat_choice()
         {
             Game.Cursor_standard_pos();
-            Console.WriteLine(" Do you wish to fight this beast for loot and glory?");
-            Console.WriteLine(" 1. Yes");
-            Console.WriteLine(" 2. No (Lose points for cowardice)");
+            Console.WriteLine("Do you wish to fight this beast for loot and glory?");
+            Console.WriteLine("1. Yes");
+            Console.WriteLine("2. No (Lose points for cowardice)");
             string Key = Console.ReadLine();
 
             if (Key == "1")

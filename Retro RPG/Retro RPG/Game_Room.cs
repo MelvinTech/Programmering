@@ -38,7 +38,7 @@ namespace Retro_RPG
         private static void Tanswer()
         {
             Game.Cursor_standard_pos();
-            Console.WriteLine("\n1. Yes \n2. No");
+            Console.WriteLine("\n\n1. Yes \n2. No");
             string ans = Console.ReadLine();
 
             if (ans == "1")
@@ -116,9 +116,9 @@ namespace Retro_RPG
         static void Double_Path()  // det finns två stigar som spelaren kan ta
         {
             Game.Cursor_standard_pos();
-            Console.WriteLine(" You can go left and right!");
-            Console.WriteLine(" 1. Go left");
-            Console.WriteLine(" 2. Go right");
+            Console.WriteLine("You can go left and right!");
+            Console.WriteLine("1. Go left");
+            Console.WriteLine("2. Go right");
             string choice = Console.ReadLine();
 
             if (choice == "1")
@@ -140,10 +140,10 @@ namespace Retro_RPG
         static void Triple_Path()  // det finns tre stigar som spelaren kan ta
         {
             Game.Cursor_standard_pos();
-            Console.WriteLine(" You can go left, right or center");
-            Console.WriteLine(" 1. Go forward");
-            Console.WriteLine(" 2. Go left");
-            Console.WriteLine(" 3. Go right");
+            Console.WriteLine("You can go left, right or center");
+            Console.WriteLine("1. Go forward");
+            Console.WriteLine("2. Go left");
+            Console.WriteLine("3. Go right");
             string choice = Console.ReadLine();
 
             if (choice == "1")
