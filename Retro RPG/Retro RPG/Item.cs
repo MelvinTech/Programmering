@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace Retro_RPG
 {
@@ -12,6 +13,8 @@ namespace Retro_RPG
         private static string part2;
         private static string part3;
         private static int level_cap = 1;
+        private static bool item_slot = false; //true = weapon slot, false = armor slot
+
 
         public static int Level_cap
         {
@@ -31,6 +34,7 @@ namespace Retro_RPG
             item_armor = 0;
 
             Random nr1 = new Random();
+            int item_type = nr1.Next();
 
             string[] nchoice1 = new string[] {"Rusty ", "Chipped ", "Gleaming "};
             part1 = nchoice1[nr1.Next(0, nchoice1.Length - level_cap)];
@@ -38,13 +42,38 @@ namespace Retro_RPG
             string[] nchoice2 = new string[] {"bronze ", "iron ", "steel "};
             part2 = nchoice2[nr1.Next(0, nchoice2.Length - level_cap)];
 
-            string[] nchoice3 = new string[] {"sword", "axe", "warhammer", "jacket", "chainmail", "platemail" };
-            part3 = nchoice3[nr1.Next(0, nchoice3.Length - level_cap)];
+            if (item_type % 2 == 0)
+            {
+                Weapon_type();
+            }
+            else
+            {
+                Armor_type();
+            }
 
             item_name = part1 + part2 + part3;
 
             Stats();
         }
+
+        void Weapon_type()
+        {
+            item_slot = true;
+            Random nr = new Random();
+
+            string[] nchoice3 = new string[] {"sword", "axe", "warhammer"};
+            part3 = nchoice3[nr.Next(0, nchoice3.Length)];
+        }
+
+        void Armor_type()
+        {
+            item_slot = false;
+            Random nr = new Random();
+
+            string[] nchoice3 = new string[] { "jacket", "chainmail", "platemail" };
+            part3 = nchoice3[nr.Next(0, nchoice3.Length)];
+        }
+
         private void Stats()
         {
             if (part1 == "Rusty ")
