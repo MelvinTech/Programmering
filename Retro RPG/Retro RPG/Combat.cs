@@ -158,11 +158,7 @@ namespace Retro_RPG
 
             if (num == 1)
             {
-                if (Parmor <= EAD)
-                {
-                    E_slice();
-                }
-                else
+                if (Parmor >= EAD)
                 {
                     Enemy_round();
                 }
