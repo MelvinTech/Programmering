@@ -18,24 +18,42 @@ namespace Retro_RPG
         private static int used_item_AD;
         private static int used_item_armor;
 
-        public static void Treasure_Room() // Representerar ett nytt rum med chans att innehålla utrustning
+        public static int pwr_up = 0;
+
+        public static void Treasure_Room() // Representerar ett nytt rum med chans att innehålla utrustning eller en powerup.
         {
+            Random random1 = new Random();
+            int num = random1.Next(1,3);
 
-            new Item();
+            if (num == 1) //Kollar ifall numret är lika med 1 vilket betyder att spelaren hittar utrustning.
+            {
+                new Item();
 
-            Game.Update();
-            Console.SetCursorPosition(0, 8);
-            Console.WriteLine("When you search the small room you find (a) " + Item.Item_name + ".");
-            Console.WriteLine("Do you want to use the item? (You can ony use one item at the same time!)");
-            Console.WriteLine("\nCurrent item: " + used_item_name);
-            Console.WriteLine("Current stats: AD: " + used_item_AD + " armor: " + used_item_armor);
-            
-            Console.WriteLine("\nNew item: " + Item.Item_name);
-            Console.WriteLine("New stats: AD: " + Item.Item_AD + " armor:" + Item.Item_armor);
+                Game.Update();
+                Console.SetCursorPosition(0, 8);
+                Console.WriteLine("When you search the small room you find (a) " + Item.Item_name + ".");
+                Console.WriteLine("Do you want to use the item? (You can ony use one item at the same time!)");
+                Console.WriteLine("\nCurrent item: " + used_item_name);
+                Console.WriteLine("Current stats: AD: " + used_item_AD + " armor: " + used_item_armor);
 
-            Tanswer();
+                Console.WriteLine("\nNew item: " + Item.Item_name);
+                Console.WriteLine("New stats: AD: " + Item.Item_AD + " armor:" + Item.Item_armor);
+
+                T_Item_answer();
+            }
+
+            if (num == 2) //Kollar ifall numret är lika med två vilket betyder att spelaren hittar en powerup.
+            {
+                Game.Update();
+                Console.SetCursorPosition(0, 8);
+                Console.WriteLine("You stumble across a large room with a central altar with a red glow. \nWhen you get close to it a red glowing orb enters your chest an you feel stronger.");
+                Console.WriteLine("\nFor your next two fights your damage and armor are increased.");
+
+                Console.ReadKey();
+                new Game_Room();
+            }
         }
-        private static void Tanswer()
+        private static void T_Item_answer() //Ser ifall spelaren vill använda utrustningen den hittade eller inte.
         {
             Game.Cursor_standard_pos();
             Console.WriteLine("\n\n1. Yes \n2. No");
@@ -68,7 +86,7 @@ namespace Retro_RPG
             else
             {
                 Game.Error_message();
-                Tanswer();
+                T_Item_answer();
             }
         }
 
