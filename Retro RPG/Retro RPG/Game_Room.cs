@@ -17,8 +17,20 @@ namespace Retro_RPG
         private static string used_item_name = "Broken dagger";
         private static int used_item_AD;
         private static int used_item_armor;
+        private static int damage_up_value = 0;
+        private static int defence_up_value = 0;
 
-        public static int pwr_up = 0;
+        public static int Damage_up_value
+        {
+            get { return damage_up_value; }
+            set { damage_up_value = value ; }
+        }
+
+        public static int Defence_up_value
+        {
+            get { return defence_up_value; }
+            set { defence_up_value = value; }
+        }
 
         public static void Treasure_Room() // Representerar ett nytt rum med chans att innehålla utrustning eller en powerup.
         {
@@ -32,7 +44,7 @@ namespace Retro_RPG
                 Game.Update();
                 Console.SetCursorPosition(0, 8);
                 Console.WriteLine("When you search the small room you find (a) " + Item.Item_name + ".");
-                Console.WriteLine("Do you want to use the item? (You can ony use one item at the same time!)");
+                Console.WriteLine("Do you want to use the item? (You can ony use one item at a time!)");
                 Console.WriteLine("\nCurrent item: " + used_item_name);
                 Console.WriteLine("Current stats: AD: " + used_item_AD + " armor: " + used_item_armor);
 
@@ -44,11 +56,29 @@ namespace Retro_RPG
 
             if (num == 2) //Kollar ifall numret är lika med två vilket betyder att spelaren hittar en powerup.
             {
-                Game.Update();
-                Console.SetCursorPosition(0, 8);
-                Console.WriteLine("You stumble across a large room with a central altar with a red glow. \nWhen you get close to it a red glowing orb enters your chest an you feel stronger.");
-                Console.WriteLine("\nFor your next two fights your damage and armor are increased.");
+                Damage_up_value = random1.Next(5,11);
+                Defence_up_value = random1.Next(1, 6);
 
+                if (random1.Next(0,3) == 1)
+                {
+                    Combat.damage_up = true;
+                    Combat.Damage_count = 0;
+
+                    Game.Update();
+                    Console.SetCursorPosition(0, 8);
+                    Console.WriteLine("You stumble across a large room with a central altar with a red glow. \nWhen you get close to it a red glowing orb enters your chest and you feel stronger.");
+                    Console.WriteLine("\nFor your next two fights your damage is increased by " + Damage_up_value + ".");
+                }
+                else 
+                {
+                    Combat.defence_up = true;
+                    Combat.Defence_count = 0;
+
+                    Game.Update();
+                    Console.SetCursorPosition(0, 8);
+                    Console.WriteLine("You stumble across a large room with a central altar with a blue glow. \nWhen you get close to it a blue glowing orb enters your chest and you feel stronger.");
+                    Console.WriteLine("\nFor your next two fights your defence is increased by " + Defence_up_value + ".");
+                }
                 Console.ReadKey();
                 new Game_Room();
             }

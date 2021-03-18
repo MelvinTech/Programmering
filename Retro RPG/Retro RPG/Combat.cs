@@ -4,8 +4,22 @@ namespace Retro_RPG
 {
     class Combat
     {
-        private bool P_Round = false;
+        private bool p_round = false;
+        public static bool damage_up = false;
+        public static bool defence_up = false;
+        static int damage_count = 0;
+        static int defence_count = 0;
         private int damage = 0;
+
+        public static int Damage_count
+        {
+            set { damage_count = value; }
+        }
+
+        public static int Defence_count
+        {
+            set { defence_count = value; }
+        }
 
         public Combat()
         {
@@ -66,18 +80,40 @@ namespace Retro_RPG
                 Game.Game_Over();
             }
 
-            else if (P_Round == false)
+            else if (p_round == false)
             {
                 Player_round();
             }
-            else if (P_Round == true)
+            else if (p_round == true)
             {
                 Enemy_round();
             }
         }
-        public static void Battle_Score()
+        public static void Battle_Score() //Markerar slutet av en runda som spelaren vann. Den räknar ut hur många poäng som spelaren ska få och kollar ifall powerup tiden är slut.
         {
             string name = Enemy.Enemy_name;
+
+            if (damage_up == true)
+            {
+                damage_count++;
+                if (damage_count == 2)
+                {
+                    damage_up = false;
+                    damage_count = 0;
+                    Game_Room.Damage_up_value = 0;
+                }
+            }
+
+            if (defence_up == true)
+            {
+                defence_count++;
+                if (defence_count == 2)
+                {
+                    defence_up = false;
+                    defence_count = 0;
+                    Game_Room.Defence_up_value = 0;
+                }
+            }
 
             if (name == "Goblin")
             {
@@ -107,10 +143,20 @@ namespace Retro_RPG
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        void Player_round()
+        void Player_round() //Går igenom det spelaren ska göra under varje runda.
         {
-            P_Round = true;
-            Console.WriteLine("What do you wish to do?");
+            p_round = true;
+
+            if (damage_up == true)
+            {
+                Console.WriteLine("Pure damage stats: " + Game_Room.Damage_up_value);
+            }
+            if (defence_up == true)
+            {
+                Console.WriteLine("Pure defence stats: " + Game_Room.Defence_up_value);
+            }
+
+            Console.WriteLine("\nWhat do you wish to do?");
             Console.WriteLine("1. Slice at enemy");
             Console.WriteLine("2. Stab at enemy");
             Console.WriteLine("3. Raise shield");
@@ -150,9 +196,9 @@ namespace Retro_RPG
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        void Enemy_round()
+        void Enemy_round() // Går igenom vad fienden ska göra varje runda.
         {
-            P_Round = false;
+            p_round = false;
             Random Ac = new Random();
             int num = Ac.Next(1, 5);
 
@@ -186,15 +232,17 @@ namespace Retro_RPG
             Battle();
         }
 
+        // Följande är alternativ som spelaren eller fienden an välja under runda.
+
         void E_slice()
         {
             damage = EAD - Parmor;
-            Player_damage();
+            Damage_to_player();
         }
         void E_stab()
         {
             damage = EAD / 2 - Parmor / 4;
-            Player_damage();
+            Damage_to_player();
         }
         void E_shield()
         {
@@ -209,12 +257,12 @@ namespace Retro_RPG
         void P_slice()
         {
             damage = PAD - Earmor;
-            Enemy_damage();
+            Damage_to_enemy();
         }
         void P_stab()
         {
             damage = PAD / 2 - Earmor / 4;
-            Enemy_damage();
+            Damage_to_enemy();
         }
         void P_shield()
         {
@@ -235,22 +283,22 @@ namespace Retro_RPG
             }
             Game.Update();
         }
-        void Player_damage()
+        void Damage_to_player()  //Bestämmer skadan som fienden gör på spelaren.
         {
             if (damage < 0)
             {
                 damage = 0;
             }
-            Player.Player_HP = -damage;
+            Player.Player_HP = -damage + Game_Room.Defence_up_value;
             Game.Update();
         }
-        void Enemy_damage()
+        void Damage_to_enemy()  //Bestämmer skadan som spelaren gör mot fienden.
         {
             if (damage < 0)
             {
                 damage = 0;
             }
-            Enemy.Enemy_HP = -damage;
+            Enemy.Enemy_HP = -damage - Game_Room.Damage_up_value;
             Game.Update();
         }
     }

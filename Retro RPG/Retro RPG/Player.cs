@@ -6,7 +6,7 @@ namespace Retro_RPG
     {
         // obs! test data
 
-        private static int player_HP = 10;
+        private static int player_HP = 20;
         private static int player_AD = 20;
         private static int player_Armor = 10;
         private static string player_Name;
