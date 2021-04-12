@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Dynamic;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -8,12 +9,12 @@ namespace Retro_RPG
     public class Game
     {
         public static int Score = 0;
-        private static int error_pos_x = 1;
-        private static int error_pos_y = Console.WindowHeight - 3;
-        private static int standard_pos_x = 0;
-        private static int standard_pos_y = Console.WindowHeight / 2;
+        private static readonly int error_pos_x = 1;
+        private static readonly int error_pos_y = Console.WindowHeight - 3;
+        private static readonly int standard_pos_x = 0;
+        private static readonly int standard_pos_y = Console.WindowHeight / 2;
 
-        private static string error_command = "Unrecognised command, please try again.";
+        private static readonly string error_command = "Unrecognised command, please try again.";
 
         public static int Error_pos_x
         {
@@ -26,16 +27,17 @@ namespace Retro_RPG
 
         public static void Main()
         {
+            string text = File.ReadAllText(@"C:.\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\Textfiler\Room events\Reg.room1.txt");
+            Console.WriteLine(text);
+            //new Player();
 
-            new Player();
 
-
-            new Game_Room();
+            // new Game_Room();
 
             // OBS! lägg till ordentlig startfunktion
         }
 
-        public static void Update()
+        public static void Update() //Kallas efter varje kommando.
         {
             if (Player.Player_HP <= 0)
             {
@@ -48,7 +50,7 @@ namespace Retro_RPG
                 Console.SetCursorPosition(0, 10);
             }
         }
-        public static void Game_Over()
+        public static void Game_Over() // Körs när spelaren har 0 eller mindre HP kver. 
         {
             Console.Clear();
             Console.SetCursorPosition(standard_pos_x, standard_pos_y);
@@ -58,12 +60,12 @@ namespace Retro_RPG
             Environment.Exit(1);
         }
 
-        public static void Error_message()
+        public static void Error_message() //Används när spelaren slår in ett felaktigt kommando.
         {
             Console.SetCursorPosition(Game.Error_pos_x, Game.Error_pos_y);
             Console.Write(error_command);
         }
-        public static void Cursor_standard_pos()
+        public static void Cursor_standard_pos() //Används för att sätta pekaren på en standard position vid varje nytt kommando.
         {
             Console.SetCursorPosition(standard_pos_x, standard_pos_y);
         }

@@ -25,7 +25,7 @@ namespace Retro_RPG
 
         public static int Item_armor { get { return item_armor; } }
 
-        public Item()
+        public Item() //Skapar en ny Item av tre förbestämda delar.
         {
             item_AD = 0;
             item_armor = 0;
@@ -45,7 +45,7 @@ namespace Retro_RPG
 
             Stats();
         }
-        private void Stats()
+        private void Stats() //Ger det nya itemet ett antal stats baserat på namnet det fick.
         {
             if (part1 == "Rusty ")
             {

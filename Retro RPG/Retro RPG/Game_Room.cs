@@ -51,7 +51,7 @@ namespace Retro_RPG
                 Console.WriteLine("\nNew item: " + Item.Item_name);
                 Console.WriteLine("New stats: AD: " + Item.Item_AD + " armor:" + Item.Item_armor);
 
-                T_Item_answer();
+                Item_answer();
             }
 
             if (num == 2) //Kollar ifall numret är lika med två vilket betyder att spelaren hittar en powerup.
@@ -79,11 +79,10 @@ namespace Retro_RPG
                     Console.WriteLine("You stumble across a large room with a central altar with a blue glow. \nWhen you get close to it a blue glowing orb enters your chest and you feel stronger.");
                     Console.WriteLine("\nFor your next two fights your defence is increased by " + Defence_up_value + ".");
                 }
-                Console.ReadKey();
                 new Game_Room();
             }
         }
-        private static void T_Item_answer() //Ser ifall spelaren vill använda utrustningen den hittade eller inte.
+        private static void Item_answer() //Ser ifall spelaren vill använda utrustningen den hittade eller inte.
         {
             Game.Cursor_standard_pos();
             Console.WriteLine("\n\n1. Yes \n2. No");
@@ -116,7 +115,7 @@ namespace Retro_RPG
             else
             {
                 Game.Error_message();
-                T_Item_answer();
+                Item_answer();
             }
         }
 
