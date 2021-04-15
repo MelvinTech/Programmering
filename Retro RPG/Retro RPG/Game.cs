@@ -27,12 +27,14 @@ namespace Retro_RPG
 
         public static void Main()
         {
-            string text = File.ReadAllText(@"C:.\melvi\OneDrive\Desktop\Programmering\Programmering 1\Programmering\Retro RPG\Retro RPG\Textfiler\Room events\Reg.room1.txt");
+            string text1 = "Room2.txt";
+
+            string text = File.ReadAllText(@"Textfiler/1WayRoom/"+text1);    // Ta bort när det är implementerat.
             Console.WriteLine(text);
-            //new Player();
+            new Player();
 
 
-            // new Game_Room();
+            new Game_Room();
 
             // OBS! lägg till ordentlig startfunktion
         }
