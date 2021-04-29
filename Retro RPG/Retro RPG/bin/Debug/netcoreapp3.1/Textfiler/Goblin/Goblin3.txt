@@ -1,0 +1,8 @@
+						You enter what seems to be some sort of small kitchen. 
+						A woodfueled stove sits in the corner with embers flying 
+						everywhere and on top of it lies a large pot that 
+						smells terrible. You hear a disgruntled grunt from behind 
+						you and when you turn around you see a goblin with a 
+						large knife standing in the doorway. There is a path behind you.
+
+						What do you do?

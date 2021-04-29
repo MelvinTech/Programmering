@@ -13,6 +13,9 @@ namespace Retro_RPG
         private static readonly int error_pos_y = Console.WindowHeight - 3;
         private static readonly int standard_pos_x = 0;
         private static readonly int standard_pos_y = Console.WindowHeight / 2;
+        private static readonly int text_pos_x = 0;
+        private static readonly int text_pos_y = 1;
+
 
         private static readonly string error_command = "Unrecognised command, please try again.";
 
@@ -27,12 +30,10 @@ namespace Retro_RPG
 
         public static void Main()
         {
-            string text1 = "Room2.txt";
-
-            string text = File.ReadAllText(@"Textfiler/1WayRoom/"+text1);    // Ta bort när det är implementerat.
-            Console.WriteLine(text);
+            
             new Player();
 
+            Game_Room.Single_Path();
 
             new Game_Room();
 
@@ -70,6 +71,11 @@ namespace Retro_RPG
         public static void Cursor_standard_pos() //Används för att sätta pekaren på en standard position vid varje nytt kommando.
         {
             Console.SetCursorPosition(standard_pos_x, standard_pos_y);
+        }
+
+        public static void Cursor_text_pos()
+        {
+            Console.SetCursorPosition(text_pos_x, text_pos_y);
         }
     }
 }

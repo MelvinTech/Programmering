@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Retro_RPG
 {
@@ -30,7 +31,39 @@ namespace Retro_RPG
 
         void Combat_choice()
         {
+            Game.Cursor_text_pos();
+
+            string enemy = "";
+            Random nr = new Random();
+            string EnemyNR = nr.Next(1, 4).ToString();
+
+            if (Enemy.Enemy_name == "Goblin")
+            {
+                enemy = "Goblin";
+            }
+
+            else if (Enemy.Enemy_name == "Orc")
+            {
+                enemy = "Orc";
+            }
+
+            else if (Enemy.Enemy_name == "Goblin")
+            {
+                enemy = "orc";
+            }
+
+            else
+            {
+                enemy = "Raidboss";
+            }
+
+            Game.Cursor_text_pos();
+
+            string text = File.ReadAllText(@"Textfiler/"+ enemy +"/" + enemy + EnemyNR + ".txt");
+            Console.WriteLine(text);
+
             Game.Cursor_standard_pos();
+
             Console.WriteLine("Do you wish to fight this beast for loot and glory?");
             Console.WriteLine("1. Yes");
             Console.WriteLine("2. No (Lose points for cowardice)");

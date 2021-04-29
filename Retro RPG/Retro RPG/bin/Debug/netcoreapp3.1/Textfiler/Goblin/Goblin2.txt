@@ -1,0 +1,7 @@
+						As you enter the room you see a small creature with 
+						large ears and grey skin sitting in a corner. 
+						You must have woken it from a deep slumber as it 
+						seems very angry as it slowly rises and grabs for 
+						its old rusty axe.
+
+						What do you do?

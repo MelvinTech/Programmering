@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 
 namespace Retro_RPG
@@ -65,9 +66,11 @@ namespace Retro_RPG
                     Combat.Damage_count = 0;
 
                     Game.Update();
-                    Console.SetCursorPosition(0, 8);
-                    Console.WriteLine("You stumble across a large room with a central altar with a red glow. \nWhen you get close to it a red glowing orb enters your chest and you feel stronger.");
-                    Console.WriteLine("\nFor your next two fights your damage is increased by " + Damage_up_value + ".");
+                    Game.Cursor_text_pos();
+
+                    string text = File.ReadAllText(@"Textfiler/PowerUpRoom/DamageUp.txt");
+                    Console.WriteLine(text);
+
                 }
                 else 
                 {
@@ -75,9 +78,11 @@ namespace Retro_RPG
                     Combat.Defence_count = 0;
 
                     Game.Update();
-                    Console.SetCursorPosition(0, 8);
-                    Console.WriteLine("You stumble across a large room with a central altar with a blue glow. \nWhen you get close to it a blue glowing orb enters your chest and you feel stronger.");
-                    Console.WriteLine("\nFor your next two fights your defence is increased by " + Defence_up_value + ".");
+                    Game.Cursor_text_pos();
+
+                    string text = File.ReadAllText(@"Textfiler/PowerUpRoom/ArmorUp.txt");
+                    Console.WriteLine(text);
+
                 }
                 new Game_Room();
             }
@@ -143,8 +148,17 @@ namespace Retro_RPG
 
         public static void Single_Path() // det finns en stig som spelaren kan ta
         {
+            Game.Cursor_text_pos();
+
+            string RoomNR = "0";
+            Random nr = new Random();
+            RoomNR =  nr.Next(1, 7).ToString();
+
+            string text = File.ReadAllText(@"Textfiler/1WayRoom/Room" + RoomNR + ".txt");    
+            Console.WriteLine(text);
+
             Game.Cursor_standard_pos();
-            Console.WriteLine("You can only go forward!");
+
             Console.WriteLine("1. Go forward");
             string choice = Console.ReadLine();
 
@@ -162,8 +176,16 @@ namespace Retro_RPG
 
         static void Double_Path()  // det finns två stigar som spelaren kan ta
         {
+            Game.Cursor_text_pos();
+
+            string RoomNR = "0";
+            Random nr = new Random();
+            RoomNR = nr.Next(1, 7).ToString();
+
+            string text = File.ReadAllText(@"Textfiler/2WayRoom/Room" + RoomNR + ".txt");
+            Console.WriteLine(text);
+
             Game.Cursor_standard_pos();
-            Console.WriteLine("You can go left and right!");
             Console.WriteLine("1. Go left");
             Console.WriteLine("2. Go right");
             string choice = Console.ReadLine();
@@ -186,8 +208,16 @@ namespace Retro_RPG
 
         static void Triple_Path()  // det finns tre stigar som spelaren kan ta
         {
+            Game.Cursor_text_pos();
+
+            string RoomNR = "0";
+            Random nr = new Random();
+            RoomNR = nr.Next(1, 7).ToString();
+
+            string text = File.ReadAllText(@"Textfiler/3WayRoom/Room" + RoomNR + ".txt");
+            Console.WriteLine(text);
+
             Game.Cursor_standard_pos();
-            Console.WriteLine("You can go left, right or center");
             Console.WriteLine("1. Go forward");
             Console.WriteLine("2. Go left");
             Console.WriteLine("3. Go right");
