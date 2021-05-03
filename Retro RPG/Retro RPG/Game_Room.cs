@@ -7,9 +7,13 @@ namespace Retro_RPG
     class Game_Room
     {
         static int Nr_Paths = 0;
+        public static string RoomNR;
 
         public Game_Room() // skapar ett nytt rum
         {
+            Random nr = new Random();
+            RoomNR = nr.Next(1, 7).ToString();
+
             Nr_Path();
         }
 
@@ -68,9 +72,11 @@ namespace Retro_RPG
                     Game.Update();
                     Game.Cursor_text_pos();
 
-                    string text = File.ReadAllText(@"Textfiler/PowerUpRoom/DamageUp.txt");
+                    string text = File.ReadAllText(@"Textfiler/PowerUpRoom/DamageUp.txt"); // Jag använder denna för att på ett enklare sätt skriva ut långa texter
                     Console.WriteLine(text);
-
+                    Console.SetCursorPosition(48 ,Console.WindowHeight / 6);
+                    Console.WriteLine("For your next two fights your damage is increased by " + Damage_up_value + ".");
+                    Console.ReadLine();
                 }
                 else 
                 {
@@ -82,7 +88,9 @@ namespace Retro_RPG
 
                     string text = File.ReadAllText(@"Textfiler/PowerUpRoom/ArmorUp.txt");
                     Console.WriteLine(text);
-
+                    Console.SetCursorPosition(48, Console.WindowHeight / 4);
+                    Console.WriteLine("For your next two fights your defence is increased by " + Defence_up_value + ".");
+                    Console.ReadLine();
                 }
                 new Game_Room();
             }
@@ -146,13 +154,16 @@ namespace Retro_RPG
 
         }
 
-        public static void Single_Path() // det finns en stig som spelaren kan ta
+        public static void Single_Path() 
         {
-            Game.Cursor_text_pos();
+            /* 
+            Varje _Path representerar ett rum med ett antal utgångar. 
+            När ett sådant rum kommer upp skrivs det ut en slumpmässigt vald text som passar in på rummet.
+            För att kunna använda ett varierat utbud av texter för varje rum väljer datorn ett slumpmässigt tal mellan 1 - 6 
+            som sedan väljer vilken text som skrivs ut. 
+            */
 
-            string RoomNR = "0";
-            Random nr = new Random();
-            RoomNR =  nr.Next(1, 7).ToString();
+            Game.Cursor_text_pos();   
 
             string text = File.ReadAllText(@"Textfiler/1WayRoom/Room" + RoomNR + ".txt");    
             Console.WriteLine(text);
@@ -174,13 +185,9 @@ namespace Retro_RPG
             }
         }
 
-        static void Double_Path()  // det finns två stigar som spelaren kan ta
+        static void Double_Path()  // Se "Single_Path"
         {
             Game.Cursor_text_pos();
-
-            string RoomNR = "0";
-            Random nr = new Random();
-            RoomNR = nr.Next(1, 7).ToString();
 
             string text = File.ReadAllText(@"Textfiler/2WayRoom/Room" + RoomNR + ".txt");
             Console.WriteLine(text);
@@ -206,13 +213,9 @@ namespace Retro_RPG
             }
         }
 
-        static void Triple_Path()  // det finns tre stigar som spelaren kan ta
+        static void Triple_Path()  // Se "Single_Path"
         {
             Game.Cursor_text_pos();
-
-            string RoomNR = "0";
-            Random nr = new Random();
-            RoomNR = nr.Next(1, 7).ToString();
 
             string text = File.ReadAllText(@"Textfiler/3WayRoom/Room" + RoomNR + ".txt");
             Console.WriteLine(text);

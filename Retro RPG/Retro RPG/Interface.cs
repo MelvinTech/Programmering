@@ -7,7 +7,7 @@ namespace Retro_RPG
         public static void Update_Interface()              // Uppdaterar spelets "interface" med nya siffror och namn
         {
             Console.Clear();                             // raderar alla tecken på skärmen
-            Console.SetCursorPosition(0, 0);            // placerar pekaren i översta vänstra hörnet
+            Game.Cursor_text_pos();        // placerar pekaren i översta vänstra hörnet
 
             Console.WriteLine("Player: Name: " + Player.Player_name);  // skriver ut att det är spelaren stats som följer   
             Console.WriteLine("Level: " + Player.Player_level);

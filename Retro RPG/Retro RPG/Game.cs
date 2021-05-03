@@ -9,8 +9,8 @@ namespace Retro_RPG
     public class Game
     {
         public static int Score = 0;
-        private static readonly int error_pos_x = 1;
-        private static readonly int error_pos_y = Console.WindowHeight - 3;
+        private static readonly int error_pos_x = 0;
+        private static readonly int error_pos_y = Console.WindowHeight - 4;
         private static readonly int standard_pos_x = 0;
         private static readonly int standard_pos_y = Console.WindowHeight / 2;
         private static readonly int text_pos_x = 0;
@@ -30,10 +30,9 @@ namespace Retro_RPG
 
         public static void Main()
         {
-            
+            Console.SetWindowSize(120, 35); // Används för att sätta rätt storlek på konsollfönstret.
             new Player();
 
-            Game_Room.Single_Path();
 
             new Game_Room();
 
@@ -73,7 +72,7 @@ namespace Retro_RPG
             Console.SetCursorPosition(standard_pos_x, standard_pos_y);
         }
 
-        public static void Cursor_text_pos()
+        public static void Cursor_text_pos() //Används för att sätta pekaren på ätt ställe för text
         {
             Console.SetCursorPosition(text_pos_x, text_pos_y);
         }

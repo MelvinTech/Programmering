@@ -11,6 +11,7 @@ namespace Retro_RPG
         static int damage_count = 0;
         static int defence_count = 0;
         private int damage = 0;
+        public static string enemyNR;
 
         public static int Damage_count
         {
@@ -24,6 +25,9 @@ namespace Retro_RPG
 
         public Combat()
         {
+            Random nr = new Random();
+            enemyNR = nr.Next(1, 4).ToString();
+
             new Enemy();
             Game.Update();
             Combat_choice();
@@ -33,9 +37,7 @@ namespace Retro_RPG
         {
             Game.Cursor_text_pos();
 
-            string enemy = "";
-            Random nr = new Random();
-            string EnemyNR = nr.Next(1, 4).ToString();
+            string enemy;
 
             if (Enemy.Enemy_name == "Goblin")
             {
@@ -47,9 +49,9 @@ namespace Retro_RPG
                 enemy = "Orc";
             }
 
-            else if (Enemy.Enemy_name == "Goblin")
+            else if (Enemy.Enemy_name == "Witch")
             {
-                enemy = "orc";
+                enemy = "Witch";
             }
 
             else
@@ -59,14 +61,13 @@ namespace Retro_RPG
 
             Game.Cursor_text_pos();
 
-            string text = File.ReadAllText(@"Textfiler/"+ enemy +"/" + enemy + EnemyNR + ".txt");
+            string text = File.ReadAllText(@"Textfiler/"+ enemy +"/" + enemy + enemyNR + ".txt");
             Console.WriteLine(text);
 
             Game.Cursor_standard_pos();
 
-            Console.WriteLine("Do you wish to fight this beast for loot and glory?");
-            Console.WriteLine("1. Yes");
-            Console.WriteLine("2. No (Lose points for cowardice)");
+            Console.WriteLine("1. You will fight this fiend!");
+            Console.WriteLine("2. You shall bravely run away!");
             string Key = Console.ReadLine();
 
             if (Key == "1")
