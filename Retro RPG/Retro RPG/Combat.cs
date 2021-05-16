@@ -190,6 +190,8 @@ namespace Retro_RPG
                 Console.WriteLine("Pure defence stats: " + Game_Room.Defence_up_value);
             }
 
+            Game.Cursor_standard_pos();
+
             Console.WriteLine("\nWhat do you wish to do?");
             Console.WriteLine("1. Slice at enemy");
             Console.WriteLine("2. Stab at enemy");

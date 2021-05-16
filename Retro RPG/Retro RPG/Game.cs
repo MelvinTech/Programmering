@@ -31,15 +31,24 @@ namespace Retro_RPG
         public static void Main()
         {
             Console.SetWindowSize(120, 35); // Används för att sätta rätt storlek på konsollfönstret.
-            new Player();
-
-
-            new Game_Room();
-
-            // OBS! lägg till ordentlig startfunktion
+            Start();
         }
 
-        public static void Update() //Kallas efter varje kommando.
+        public static void Start()
+        {
+            Cursor_text_pos();
+            Console.WriteLine(" Rogue: Devolved");
+            Console.WriteLine("\n Welcome to the dungeon! What you will meet within I cannot say. \n Will you meet your maker or will you see your way through the darkness?");
+            Console.WriteLine("\n Before you enter you must know that reaching a satisfying ending is \n difficult and time consuming. You will not do on your first try!");
+            Console.WriteLine(" Now, what is thy name adventurer! \n ");
+
+            new Player(Console.ReadLine());
+            Update();
+
+            new Game_Room();
+        }
+
+        public static void Update() //Kallas efter de flesta kommandon.
         {
             if (Player.Player_HP <= 0)
             {
@@ -72,7 +81,7 @@ namespace Retro_RPG
             Console.SetCursorPosition(standard_pos_x, standard_pos_y);
         }
 
-        public static void Cursor_text_pos() //Används för att sätta pekaren på ätt ställe för text
+        public static void Cursor_text_pos() //Används för att sätta pekaren på rätt ställe för text.
         {
             Console.SetCursorPosition(text_pos_x, text_pos_y);
         }

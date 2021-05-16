@@ -76,6 +76,8 @@ namespace Retro_RPG
                     Console.WriteLine(text);
                     Console.SetCursorPosition(48 ,Console.WindowHeight / 6);
                     Console.WriteLine("For your next two fights your damage is increased by " + Damage_up_value + ".");
+                    Game.Cursor_standard_pos();
+                    Console.WriteLine("You can only go one way.");
                     Console.ReadLine();
                 }
                 else 
@@ -90,8 +92,11 @@ namespace Retro_RPG
                     Console.WriteLine(text);
                     Console.SetCursorPosition(48, Console.WindowHeight / 4);
                     Console.WriteLine("For your next two fights your defence is increased by " + Defence_up_value + ".");
+                    Game.Cursor_standard_pos();
+                    Console.WriteLine("You can only go one way.");
                     Console.ReadLine();
                 }
+                Game.Update();
                 new Game_Room();
             }
         }

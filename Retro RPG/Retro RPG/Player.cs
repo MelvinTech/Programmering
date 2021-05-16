@@ -52,11 +52,9 @@ namespace Retro_RPG
             }
         }
 
-        public Player() // OBS! ändra!
+        public Player(string name) // OBS! ändra!
         {
-            Console.SetCursorPosition(0, Console.WindowHeight / 3 / 2);
-            Console.WriteLine("Welcome adventurer, what is thy name?");
-            player_Name = Console.ReadLine();
+            player_Name = name;
         }
         public static void Level() // kollar ifall spelaren har tillräkligt mycket exp för att gå upp en level
         {
