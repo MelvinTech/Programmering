@@ -54,8 +54,9 @@ namespace Retro_RPG
                 enemy = "Witch";
             }
 
-            else
+            else // Viktigt måste fixa så att texten kan visas när det blir Raidboss!!!
             {
+                Combat_choice();
                 enemy = "Raidboss";
             }
 

@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Linq;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace Retro_RPG
 {
@@ -38,8 +39,6 @@ namespace Retro_RPG
 
         public static void Start()
         {
-            new Player(Console.ReadLine());
-            Game_Over();
 
             score = 0;
             Cursor_text_pos();
@@ -69,40 +68,30 @@ namespace Retro_RPG
         }
         public static void Game_Over() // Körs när spelaren har 0 eller mindre HP kver. 
         {
-            Save_score(score);
-
             Console.Clear();
+            Highscore();
+            Write_HS();
             Console.SetCursorPosition(standard_pos_x, standard_pos_y);
             Console.WriteLine("Game Over: Final Score: " + score.ToString());
-            Write_highscore();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
             Environment.Exit(1);
         }
 
-
-        private static void Save_score(int points)
+        static void Highscore()
         {
-            string fileName = @"Textfiler/Highscore.txt";
-            using (FileStream fs = new FileStream(fileName, FileMode.Append, FileAccess.Write))
-            using (StreamWriter sw = new StreamWriter(fs))
+            string text = File.ReadAllText("Textfiler/Highscore.txt");
+
+            using (StreamWriter outputFile = new StreamWriter("Textfiler/Highscore.txt"))
             {
-                sw.WriteLine(Player.Player_name, points);
+                outputFile.WriteLine(text + Player.Player_name + " " + score);
             }
         }
 
-        private static void Write_highscore()
+        static void Write_HS()
         {
-            var highScoreEntries = File.ReadLines("Textfiler/Highscore.txt")
-                .Select(line => {
-                    string[] parts = line.Split(',');
-                    return new { Name = parts[0], Score = int.Parse(parts[1]) };
-                })
-                .OrderByDescending(highScore => highScore.Score);
-
-            string text = File.ReadLines("Textfiler/Highscore.txt").ToString();
-            Console.Write(text);
-        }  
+            Console.Write(File.ReadAllText("Textfiler/Highscore.txt"));
+        }
 
         public static void Error_message() //Används när spelaren slår in ett felaktigt kommando.
         {
