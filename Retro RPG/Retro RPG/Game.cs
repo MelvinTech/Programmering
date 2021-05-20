@@ -3,12 +3,14 @@ using System.IO;
 using System.Dynamic;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.Linq;
+using System.Globalization;
 
 namespace Retro_RPG
 {
     public class Game
     {
-        public static int Score = 0;
+        public static int score = 0;
         private static readonly int error_pos_x = 0;
         private static readonly int error_pos_y = Console.WindowHeight - 4;
         private static readonly int standard_pos_x = 0;
@@ -36,6 +38,10 @@ namespace Retro_RPG
 
         public static void Start()
         {
+            new Player(Console.ReadLine());
+            Game_Over();
+
+            score = 0;
             Cursor_text_pos();
             Console.WriteLine(" Rogue: Devolved");
             Console.WriteLine("\n Welcome to the dungeon! What you will meet within I cannot say. \n Will you meet your maker or will you see your way through the darkness?");
@@ -63,13 +69,40 @@ namespace Retro_RPG
         }
         public static void Game_Over() // Körs när spelaren har 0 eller mindre HP kver. 
         {
+            Save_score(score);
+
             Console.Clear();
             Console.SetCursorPosition(standard_pos_x, standard_pos_y);
-            Console.WriteLine("Game Over: Final Score: " + Score.ToString());
+            Console.WriteLine("Game Over: Final Score: " + score.ToString());
+            Write_highscore();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
             Environment.Exit(1);
         }
+
+
+        private static void Save_score(int points)
+        {
+            string fileName = @"Textfiler/Highscore.txt";
+            using (FileStream fs = new FileStream(fileName, FileMode.Append, FileAccess.Write))
+            using (StreamWriter sw = new StreamWriter(fs))
+            {
+                sw.WriteLine(Player.Player_name, points);
+            }
+        }
+
+        private static void Write_highscore()
+        {
+            var highScoreEntries = File.ReadLines("Textfiler/Highscore.txt")
+                .Select(line => {
+                    string[] parts = line.Split(',');
+                    return new { Name = parts[0], Score = int.Parse(parts[1]) };
+                })
+                .OrderByDescending(highScore => highScore.Score);
+
+            string text = File.ReadLines("Textfiler/Highscore.txt").ToString();
+            Console.Write(text);
+        }  
 
         public static void Error_message() //Används när spelaren slår in ett felaktigt kommando.
         {

@@ -5,7 +5,7 @@ namespace Retro_RPG
 {
     class Combat
     {
-        private bool p_round = false;
+        private bool p_round = false; // Player Round
         public static bool damage_up = false;
         public static bool defence_up = false;
         static int damage_count = 0;
@@ -77,7 +77,7 @@ namespace Retro_RPG
             }
             else if (Key == "2")
             {
-                Game.Score -= 20;
+                Game.score -= 20;
                 Game.Update();
                 new Game_Room();
             }
@@ -91,10 +91,10 @@ namespace Retro_RPG
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        static int PAD = 0;
-        static int Parmor = 0;
-        static int EAD = 0;
-        static int Earmor = 0;
+        static int PAD = 0; //Player attack damage
+        static int Parmor = 0; //Player armor
+        static int EAD = 0; // Enemy attack damage
+        static int Earmor = 0; // Enemy armor
 
         void Battle()
         {
@@ -151,27 +151,27 @@ namespace Retro_RPG
 
             if (name == "Goblin")
             {
-                Game.Score += 10;
+                Game.score += 10;
                 Player.Player_Exp = 10;
             }
             else if (name == "Orc")
             {
-                Game.Score += 20;
+                Game.score += 20;
                 Player.Player_Exp = 20;
             }
             else if (name == "Witch")
             {
-                Game.Score += 30;
+                Game.score += 30;
                 Player.Player_Exp = 30;
             }
             else if (name == "RaidBoss")
             {
-                Game.Score += 2000;
+                Game.score += 2000;
                 Player.Player_Exp = 2000;
             }
             else
             {
-                throw new Exception("Unknown Enemy");
+                throw new Exception("Unknown Enemy Check class 'Enemy'");
             }
         }
 

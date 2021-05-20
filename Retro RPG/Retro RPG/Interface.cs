@@ -23,7 +23,7 @@ namespace Retro_RPG
             Console.WriteLine("AD: " + Enemy.Enemy_AD + " | ");      // skriver ut fiendens attack damage
 
             Console.SetCursorPosition(0, (Console.WindowHeight - 2));
-            Console.WriteLine("Points: " + Game.Score.ToString());
+            Console.WriteLine("Points: " + Game.score.ToString());
         }
     }
 }
