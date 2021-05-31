@@ -1,0 +1,3 @@
+						Commands:
+						"Clear": Removes all current scores
+						"Save and clear": Saves all current scores in a new file then "Clear"

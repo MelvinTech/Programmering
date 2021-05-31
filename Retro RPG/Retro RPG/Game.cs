@@ -1,11 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Dynamic;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Linq;
-using System.Globalization;
-using System.Collections.Generic;
+using System.Threading;
 
 namespace Retro_RPG
 {
@@ -34,6 +29,8 @@ namespace Retro_RPG
         public static void Main()
         {
             Console.SetWindowSize(120, 35); // Används för att sätta rätt storlek på konsollfönstret.
+
+            
             Start();
         }
 
@@ -47,8 +44,14 @@ namespace Retro_RPG
             Console.WriteLine("\n Before you enter you must know that reaching a satisfying ending is \n difficult and time consuming. You will not do on your first try!");
             Console.WriteLine(" Now, what is thy name adventurer! \n ");
 
-            new Player(Console.ReadLine());
+            string name = Console.ReadLine();
+            Player.Player_name = name;
             Update();
+
+            if (name.ToLower() == "admin")
+            {
+                new Admin();
+            }
 
             new Game_Room();
         }
@@ -69,16 +72,19 @@ namespace Retro_RPG
         public static void Game_Over() // Körs när spelaren har 0 eller mindre HP kver. 
         {
             Console.Clear();
-            Highscore();
+            
+            Cursor_text_pos();
+            Console.WriteLine("Game Over:\nFinal Score: " + score.ToString());
+            Console.WriteLine("Previous Scores:\n");
             Write_HS();
-            Console.SetCursorPosition(standard_pos_x, standard_pos_y);
-            Console.WriteLine("Game Over: Final Score: " + score.ToString());
+            Highscore();
+            Cursor_standard_pos();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
             Environment.Exit(1);
         }
 
-        static void Highscore()
+        private static void Highscore()
         {
             string text = File.ReadAllText("Textfiler/Highscore.txt");
 
@@ -88,8 +94,15 @@ namespace Retro_RPG
             }
         }
 
-        static void Write_HS()
+        private static void Write_HS()
         {
+            if (File.Exists("Textfiler/Highscore.txt") == false)
+            {
+                File.Create("Textfiler/Highscore.txt");
+            }
+
+            Thread.Sleep(50);
+
             Console.Write(File.ReadAllText("Textfiler/Highscore.txt"));
         }
 

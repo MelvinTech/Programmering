@@ -19,7 +19,7 @@ namespace Retro_RPG
             set { player_HP += value; }
         }
 
-        public static string Player_name { get { return player_Name; } }
+        public static string Player_name { get { return player_Name; } set { player_Name = value; } }
 
         public static int Player_level { get { return player_Level; } }
         
