@@ -2,6 +2,9 @@
 
 namespace Retro_RPG
 {
+    /// <summary>
+    /// Klassen Enemy används till att skapa fiender och ge dem korekta stats beroende på hur stark spelaren är.
+    /// </summary>
     public class Enemy
     {
         private static string enemy_name;
@@ -75,7 +78,7 @@ namespace Retro_RPG
         }
 
         // följande metoder bestämmer fiendens stats
-        // OBS! Test data för alla motståndare ändra senare för balancing 
+        // OBS! Test data för alla motståndare kan ändras senare för balancing.
         public static void Goblin()
         {
             enemy_name = "Goblin";

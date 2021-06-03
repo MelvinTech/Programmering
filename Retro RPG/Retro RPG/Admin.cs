@@ -5,9 +5,12 @@ using System.Text;
 
 namespace Retro_RPG
 {
+    /// <summary>
+    /// Den här klassen används för att skapa en administrering del av spelet där man kan ändra poäng filerna med mera.
+    /// </summary>
     public class Admin
     {
-        public Admin()
+        public Admin() 
         {
             Console.Clear();
             Game.Cursor_text_pos();

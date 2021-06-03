@@ -2,6 +2,9 @@
 
 namespace Retro_RPG
 {
+    /// <summary>
+    /// Den här klassen används endast för att skapa en interface till spelet. Skulle kanske flyttas till klassen Game istället av den anledningen.
+    /// </summary>
     public class Interface
     {
         public static void Update_Interface()              // Uppdaterar spelets "interface" med nya siffror och namn

@@ -3,15 +3,18 @@ using System.IO;
 
 namespace Retro_RPG
 {
+    /// <summary>
+    /// klassen Game_Room används till att skapa alla rummen i spelet.
+    /// </summary>
     class Game_Room
     {
         static int Nr_Paths = 0;
-        public static string RoomNR;
+        public static string roomNR;
 
         public Game_Room() // skapar ett nytt rum
         {
             Random nr = new Random();
-            RoomNR = nr.Next(1, 7).ToString();
+            roomNR = nr.Next(1, 7).ToString();
 
             Nr_Path();
         }
@@ -169,7 +172,7 @@ namespace Retro_RPG
 
             Game.Cursor_text_pos();   
 
-            string text = File.ReadAllText(@"Textfiler/1WayRoom/Room" + RoomNR + ".txt");    
+            string text = File.ReadAllText(@"Textfiler/1WayRoom/Room" + roomNR + ".txt");    
             Console.WriteLine(text);
 
             Game.Cursor_standard_pos();
@@ -193,7 +196,7 @@ namespace Retro_RPG
         {
             Game.Cursor_text_pos();
 
-            string text = File.ReadAllText(@"Textfiler/2WayRoom/Room" + RoomNR + ".txt");
+            string text = File.ReadAllText(@"Textfiler/2WayRoom/Room" + roomNR + ".txt");
             Console.WriteLine(text);
 
             Game.Cursor_standard_pos();
@@ -221,7 +224,7 @@ namespace Retro_RPG
         {
             Game.Cursor_text_pos();
 
-            string text = File.ReadAllText(@"Textfiler/3WayRoom/Room" + RoomNR + ".txt");
+            string text = File.ReadAllText(@"Textfiler/3WayRoom/Room" + roomNR + ".txt");
             Console.WriteLine(text);
 
             Game.Cursor_standard_pos();

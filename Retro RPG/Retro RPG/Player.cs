@@ -2,9 +2,12 @@
 
 namespace Retro_RPG
 {
+    /// <summary>
+    /// Klassen Player används till att skapa nya spelare
+    /// </summary>
     public class Player
     {
-        // obs! test data
+        // obs! test data, kan ändras för balancing
 
         private static int player_HP = 20;
         private static int player_AD = 20;
@@ -52,7 +55,7 @@ namespace Retro_RPG
             }
         }
 
-        public Player(string name) // OBS! ändra!
+        public Player(string name) 
         {
             player_Name = name;
         }
@@ -63,13 +66,18 @@ namespace Retro_RPG
                 Level_up();
             }
         }
-        private static void Level_up() // Höjer spelarens level med 1
+        private static void Level_up() // Höjer spelarens level med 1 och kollar ifall spelaren kan gå ipp en level till.
         {
             player_Level++;
             player_Exp -= 100;
             Player_HP += 20;
             player_AD += 5;
             player_Armor += 10;
+
+            if (player_Exp >= 100)
+            {
+                Level_up();
+            }
 
             if (player_Level >= 3)
             {

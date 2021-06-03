@@ -3,6 +3,9 @@ using System.IO;
 
 namespace Retro_RPG
 {
+    /// <summary>
+    /// Klassen Combat används till att skapa alla "combats med motståndare."
+    /// </summary>
     class Combat
     {
         private bool p_round = false; // Player Round
@@ -29,6 +32,7 @@ namespace Retro_RPG
             enemyNR = nr.Next(1, 4).ToString();
 
             new Enemy();
+
             Game.Update();
             Combat_choice();
         }
@@ -54,10 +58,11 @@ namespace Retro_RPG
                 enemy = "Witch";
             }
 
-            else // Viktigt måste fixa så att texten kan visas när det blir Raidboss!!!
+            else
             {
                 Combat_choice();
                 enemy = "Raidboss";
+                enemyNR = "1";
             }
 
             Game.Cursor_text_pos();
@@ -169,6 +174,9 @@ namespace Retro_RPG
             {
                 Game.score += 2000;
                 Player.Player_Exp = 2000;
+
+                Game.Cursor_text_pos();
+                Console.WriteLine(File.ReadAllText("Textfiler/RaidBoss/Raidboss2"));
             }
             else
             {

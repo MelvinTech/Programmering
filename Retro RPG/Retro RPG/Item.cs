@@ -3,6 +3,9 @@
 
 namespace Retro_RPG
 {
+    /// <summary>
+    /// Klassen Item används till att skapa utrustning i spelet på ett enkelt sätt.
+    /// </summary>
     class Item
     {
         private static string item_name;

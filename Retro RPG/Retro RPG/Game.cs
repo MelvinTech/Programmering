@@ -4,6 +4,9 @@ using System.Threading;
 
 namespace Retro_RPG
 {
+    /// <summary>
+    /// Klassen Game används för att starta spelet och den innehåller alla bas metoder som uppdatering samt game over och start. 
+    /// </summary>
     public class Game
     {
         public static int score = 0;
@@ -13,42 +16,32 @@ namespace Retro_RPG
         private static readonly int standard_pos_y = Console.WindowHeight / 2;
         private static readonly int text_pos_x = 0;
         private static readonly int text_pos_y = 1;
+        private static string startNR;
 
-
-        private static readonly string error_command = "Unrecognised command, please try again.";
-
-        public static int Error_pos_x
-        {
-            get { return error_pos_x; }
-        }
-        public static int Error_pos_y
-        {
-            get { return error_pos_y; }
-        }
+        private static readonly string error_command = "Unrecognised command, please try again."; //Används för att enkelt kunna ändra va som sägs vid felinmatnig.
 
         public static void Main()
         {
             Console.SetWindowSize(120, 35); // Används för att sätta rätt storlek på konsollfönstret.
 
-            
             Start();
         }
 
-        public static void Start()
+        public static void Start() //Körs då spelet startar
         {
+
+            Random nr = new Random();
+            startNR = nr.Next(1, 4).ToString();
 
             score = 0;
             Cursor_text_pos();
-            Console.WriteLine(" Rogue: Devolved");
-            Console.WriteLine("\n Welcome to the dungeon! What you will meet within I cannot say. \n Will you meet your maker or will you see your way through the darkness?");
-            Console.WriteLine("\n Before you enter you must know that reaching a satisfying ending is \n difficult and time consuming. You will not do on your first try!");
-            Console.WriteLine(" Now, what is thy name adventurer! \n ");
+            Console.WriteLine(File.ReadAllText(@"Textfiler/Start/Start" + startNR + ".txt"));
 
             string name = Console.ReadLine();
             Player.Player_name = name;
             Update();
 
-            if (name.ToLower() == "admin")
+            if (name.ToLower() == "admin") //används så att man kan komma till en annan meny
             {
                 new Admin();
             }
@@ -56,7 +49,7 @@ namespace Retro_RPG
             new Game_Room();
         }
 
-        public static void Update() //Kallas efter de flesta kommandon.
+        public static void Update() //Kallas efter de flesta kommandon och kollar ifall spelaren har förlorat eller gått upp i level.
         {
             if (Player.Player_HP <= 0)
             {
@@ -76,15 +69,17 @@ namespace Retro_RPG
             Cursor_text_pos();
             Console.WriteLine("Game Over:\nFinal Score: " + score.ToString());
             Console.WriteLine("Previous Scores:\n");
+
             Write_HS();
             Highscore();
+
             Cursor_standard_pos();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
             Environment.Exit(1);
         }
 
-        private static void Highscore()
+        private static void Highscore() //Skriver ut poäng i en fil på datorn.
         {
             string text = File.ReadAllText("Textfiler/Highscore.txt");
 
@@ -94,21 +89,20 @@ namespace Retro_RPG
             }
         }
 
-        private static void Write_HS()
+        private static void Write_HS() //Skriver ut poängen på skärmen.
         {
             if (File.Exists("Textfiler/Highscore.txt") == false)
             {
                 File.Create("Textfiler/Highscore.txt");
+                Thread.Sleep(50); //används eftersom att datorn behöver en kort paus för att skapa textfilen ifall den inte finns.
             }
-
-            Thread.Sleep(50);
 
             Console.Write(File.ReadAllText("Textfiler/Highscore.txt"));
         }
 
         public static void Error_message() //Används när spelaren slår in ett felaktigt kommando.
         {
-            Console.SetCursorPosition(Game.Error_pos_x, Game.Error_pos_y);
+            Console.SetCursorPosition(error_pos_x, error_pos_y);
             Console.Write(error_command);
         }
         public static void Cursor_standard_pos() //Används för att sätta pekaren på en standard position vid varje nytt kommando.
