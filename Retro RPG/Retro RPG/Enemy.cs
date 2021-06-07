@@ -53,17 +53,17 @@ namespace Retro_RPG
         {
             Bonus_Stats();
             Random random1 = new Random();
-            int num = random1.Next(0, 1001);
+            int num = random1.Next(0, 20);
 
-            if (num > 0 && num < 333)
+            if (num > 0 && num < 6)
             {
                 Goblin(); // Väljer Goblin som motståndare och ger dess stats
             }
-            else if (num > 332 && num < 666)
+            else if (num > 6 && num < 12)
             {
                 Orc(); // Väljer Orc som motståndare och ger dess stats
             }
-            else if (num > 666 && num < 999)
+            else if (num > 12 && num < 18)
             {
                 Witch(); // Väljer Witch som motståndare och ger dess stats
             }
@@ -84,21 +84,21 @@ namespace Retro_RPG
             enemy_name = "Goblin";
             enemy_HP = 20 + Level_stats;
             enemy_armor = -5 + Level_stats;
-            enemy_AD = 10 + Level_stats;
+            enemy_AD = 5 + Level_stats;
         }
         public static void Orc()
         {
             enemy_name = "Orc";
             enemy_HP = 40 + Level_stats;
             enemy_armor = -2 + Level_stats;
-            enemy_AD = 6 + Level_stats;
+            enemy_AD = 2 + Level_stats;
         }
         public static void Witch()
         {
             enemy_name = "Witch";
             enemy_HP = 15 + Level_stats;
             enemy_armor = 0 + Level_stats;
-            enemy_AD = 20 + Level_stats;
+            enemy_AD = 10 + Level_stats;
         }
         public static void RaidBoss()
         {

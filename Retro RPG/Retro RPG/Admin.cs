@@ -10,7 +10,7 @@ namespace Retro_RPG
     /// </summary>
     public class Admin
     {
-        public Admin() 
+        public Admin() //Används för att starta och skriva ut administratör delen av programmet.
         {
             Console.Clear();
             Game.Cursor_text_pos();
@@ -37,7 +37,7 @@ namespace Retro_RPG
             }
         }
 
-        static void Admin_scores()
+        static void Admin_scores() //När command "Scores" ´skriver detta ut alternativen för sparande av poäng.
         {
             Console.Clear();
             Game.Cursor_text_pos();
@@ -64,16 +64,20 @@ namespace Retro_RPG
             }
         }
 
-        static void Score_clear()
+        static void Score_clear() //När command "score_clear" används tar den bort filen med highscores 
         {
             File.Delete("Textfiler/Highscore.txt");
 
             new Admin();
         }
 
-        static void Score_save()
+        static void Score_save() //När command "score_save" kallas sparar det först alla gamla poäng i en ny fil i en annan mapp och tar sedan bort filen med highscores.
         {
-            File.Copy("Textfiler/Highscore.txt", "Textfiler/Oldscores/Scores.txt");
+            string new_text = File.ReadAllText("Textfiler/Highscore.txt");
+            string old_text = File.ReadAllText("Textfiler/Oldscores/Scores.txt");
+
+            File.WriteAllText("Textfiler/Oldscores/Scores.txt", old_text + new_text);
+
             File.Delete("Textfiler/Highscore.txt");
 
             new Admin();

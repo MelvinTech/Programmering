@@ -24,6 +24,9 @@ namespace Retro_RPG
         {
             Console.SetWindowSize(120, 35); // Används för att sätta rätt storlek på konsollfönstret.
 
+            Console.WriteLine(File.ReadAllText("Textfiler/Tutorialsheet.txt"));
+            Console.ReadKey();
+            Game.Update();
             Start();
         }
 
@@ -74,9 +77,20 @@ namespace Retro_RPG
             Highscore();
 
             Cursor_standard_pos();
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-            Environment.Exit(1);
+            Console.WriteLine("Would you like to try again?");
+            Console.WriteLine("1. Yes\n2. No");
+
+            string ans = Console.ReadLine();
+
+            if (ans == "1")
+            {
+                Console.Clear();
+                Start();
+            }
+            else 
+            {
+                Environment.Exit(1);
+            }
         }
 
         private static void Highscore() //Skriver ut poäng i en fil på datorn.
@@ -94,7 +108,7 @@ namespace Retro_RPG
             if (File.Exists("Textfiler/Highscore.txt") == false)
             {
                 File.Create("Textfiler/Highscore.txt");
-                Thread.Sleep(50); //används eftersom att datorn behöver en kort paus för att skapa textfilen ifall den inte finns.
+                Thread.Sleep(200); //används eftersom att datorn behöver en kort paus för att skapa textfilen ifall den inte finns.
             }
 
             Console.Write(File.ReadAllText("Textfiler/Highscore.txt"));

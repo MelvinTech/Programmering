@@ -1,4 +1,2 @@
-Bonebasher 290
-Bonesmasher 30
-Vanityman 340
-Axesmasher 50
+1 150
+Excelcior 240

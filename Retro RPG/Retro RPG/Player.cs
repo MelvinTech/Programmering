@@ -9,9 +9,9 @@ namespace Retro_RPG
     {
         // obs! test data, kan ändras för balancing
 
-        private static int player_HP = 20;
+        private static int player_HP = 100;
         private static int player_AD = 20;
-        private static int player_Armor = 10;
+        private static int player_Armor = 20;
         private static string player_Name;
         private static int player_Level = 1;
         private static int player_Exp = 0;
@@ -61,7 +61,7 @@ namespace Retro_RPG
         }
         public static void Level() // kollar ifall spelaren har tillräkligt mycket exp för att gå upp en level
         {
-            if (player_Exp >= 100)
+            if (player_Exp >= 50)
             {
                 Level_up();
             }
@@ -69,15 +69,10 @@ namespace Retro_RPG
         private static void Level_up() // Höjer spelarens level med 1 och kollar ifall spelaren kan gå ipp en level till.
         {
             player_Level++;
-            player_Exp -= 100;
-            Player_HP += 20;
-            player_AD += 5;
-            player_Armor += 10;
-
-            if (player_Exp >= 100)
-            {
-                Level_up();
-            }
+            player_Exp = -50;
+            Player_HP = 30;
+            Player_AD = 10;
+            player_Armor = 10;
 
             if (player_Level >= 3)
             {

@@ -1,0 +1,14 @@
+How to play
+
+In every room you will be greeted by a up to three choices.
+to select a choice type in the number that is next to it.
+
+Combat
+
+When in combat you have five options
+
+Slice: Deals the most damage.
+Stab: Deals damage through armor.
+Shield: Gives you more armor.
+Dodge attack: Gives less armor and a chance at taking another turn.
+Shred: Destroys some of the enemys armor.

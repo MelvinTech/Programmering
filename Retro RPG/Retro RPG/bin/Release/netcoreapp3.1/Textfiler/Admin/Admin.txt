@@ -1,0 +1,3 @@
+						Commands:
+						Scores: Use if you want to change scores.
+						Return: Use to get back to game.

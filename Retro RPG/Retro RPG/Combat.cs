@@ -9,12 +9,13 @@ namespace Retro_RPG
     class Combat
     {
         private bool p_round = false; // Player Round
-        public static bool damage_up = false;
-        public static bool defence_up = false;
-        static int damage_count = 0;
-        static int defence_count = 0;
+        public static bool damage_up = false; // berättar ifall damage_up är i effekt eller inte.
+        public static bool defence_up = false; // berättar ifall defence_up är i effekt eller inte.
+        static int damage_count = 0; // Beskriver hur många gånger som damage_up använts.
+        static int defence_count = 0; // Beskriver hur många gånger som defence_up använts.
         private int damage = 0;
-        public static string enemyNR;
+        public static string enemyNR; //Berättar vilket nummer som en textfil ska ha.
+        private static string enemyname; 
 
         public static int Damage_count
         {
@@ -26,7 +27,7 @@ namespace Retro_RPG
             set { defence_count = value; }
         }
 
-        public Combat()
+        public Combat() //används för att skapa en fight mellan spelaren och en motståndare.
         {
             Random nr = new Random();
             enemyNR = nr.Next(1, 4).ToString();
@@ -35,39 +36,10 @@ namespace Retro_RPG
 
             Game.Update();
             Combat_choice();
-        }
-
-        void Combat_choice()
-        {
-            Game.Cursor_text_pos();
-
-            string enemy;
-
-            if (Enemy.Enemy_name == "Goblin")
-            {
-                enemy = "Goblin";
-            }
-
-            else if (Enemy.Enemy_name == "Orc")
-            {
-                enemy = "Orc";
-            }
-
-            else if (Enemy.Enemy_name == "Witch")
-            {
-                enemy = "Witch";
-            }
-
-            else
-            {
-                Combat_choice();
-                enemy = "Raidboss";
-                enemyNR = "1";
-            }
 
             Game.Cursor_text_pos();
 
-            string text = File.ReadAllText(@"Textfiler/"+ enemy +"/" + enemy + enemyNR + ".txt");
+            string text = File.ReadAllText(@"Textfiler/" + enemyname + "/" + enemyname + enemyNR + ".txt");
             Console.WriteLine(text);
 
             Game.Cursor_standard_pos();
@@ -95,6 +67,39 @@ namespace Retro_RPG
             }
         }
 
+        void Combat_choice() // Bestämmer vilken fiende som spelaren ska möta.
+        {
+            Game.Cursor_text_pos();
+
+            if (Enemy.Enemy_name == "Goblin")
+            {
+                enemyname = "Goblin";
+            }
+
+            else if (Enemy.Enemy_name == "Orc")
+            {
+                enemyname = "Orc";
+            }
+
+            else if (Enemy.Enemy_name == "Witch")
+            {
+                enemyname = "Witch";
+            }
+
+            else
+            {
+                if (Player.Player_level > 4)
+                {
+                    enemyname = "Raidboss";
+                    enemyNR = "1";  //Måste sätta en specifik siffra här eftersom raidboss bara har två olika texter en för start och en för slut av fight.
+                }
+                else
+                {
+                    new Combat();
+                }
+            }
+        }
+
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         static int PAD = 0; //Player attack damage
@@ -102,7 +107,9 @@ namespace Retro_RPG
         static int EAD = 0; // Enemy attack damage
         static int Earmor = 0; // Enemy armor
 
-        void Battle()
+        void Battle() 
+            /* Används innan varje runda för att se ifall spelaren har
+            förlorat eller vunnit. Om inget utav det är sant väljer den ifall det är spelaren eller motståndarens tur att göra något.*/
         {
             PAD = Player.Player_AD;
             Parmor = Player.Player_Armor;
@@ -176,7 +183,8 @@ namespace Retro_RPG
                 Player.Player_Exp = 2000;
 
                 Game.Cursor_text_pos();
-                Console.WriteLine(File.ReadAllText("Textfiler/RaidBoss/Raidboss2"));
+                Console.WriteLine(File.ReadAllText("Textfiler/RaidBoss/RaidBoss2"));
+                Console.ReadLine();
             }
             else
             {
@@ -249,14 +257,25 @@ namespace Retro_RPG
 
             if (num == 1)
             {
-                if (Parmor >= EAD)
+                if (EAD > Parmor)                
+                {
+                    E_slice();
+                }
+                else
                 {
                     Enemy_round();
                 }
             }
             else if (num == 2)
             {
-                E_stab();
+                if (EAD / 2 > Parmor / 4)
+                {
+                    E_stab();
+                }
+                else
+                {
+                    Enemy_round();
+                }
             }
             else if (num == 3)
             {
@@ -273,11 +292,15 @@ namespace Retro_RPG
                     Enemy_round();
                 }
             }
+            else
+            {
+                throw new Exception("Combat:Enemyround: something is wrong!");
+            }
 
             Battle();
         }
 
-        // Följande är alternativ som spelaren eller fienden an välja under runda.
+        // Följande är alternativ som spelaren eller fienden an välja under en runda.
 
         void E_slice()
         {
@@ -299,6 +322,8 @@ namespace Retro_RPG
             Player.Player_Armor = -20;
         }
 
+        //////////////////////////////////////////////////
+        
         void P_slice()
         {
             damage = PAD - Earmor;
@@ -311,21 +336,26 @@ namespace Retro_RPG
         }
         void P_shield()
         {
-            Player.Player_Armor = 2;
+            Player.Player_Armor = 8;
             Game.Update();
         }
         void P_dodge()
         {
-            Player.Player_Armor = 2;
+            Player.Player_Armor = 4;
+            Random random1 = new Random();
+            int num = random1.Next(0, 2);
+
+            if (num % 2 == 0)
+            {
+                Game.Update();
+                Player_round();
+            }
+
             Game.Update();
         }
         void P_shred()
         {
-            Enemy.Enemy_armor -= PAD / 3;
-            if (Enemy.Enemy_armor < 0)
-            {
-                Enemy.Enemy_armor = 0;
-            }
+            Enemy.Enemy_armor = -(PAD / 3);
             Game.Update();
         }
         void Damage_to_player()  //Bestämmer skadan som fienden gör på spelaren.
